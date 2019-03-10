@@ -1,0 +1,23 @@
+{
+  "name": "@googlemap-react/amap-types",
+  "version": "0.0.1",
+  "description": "Type definitions for AMap",
+  "repository": "git@github.com:googlemap-react/amap-react.git",
+  "author": "Gabriel Wu <qqbbnease1004@126.com>",
+  "homepage": "https://github.com/googlemap-react/amap-react#readme",
+  "bugs": {
+    "url": "https://github.com/googlemap-react/amap-react/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "map",
+    "amap",
+    "type",
+    "type definition",
+    "typescript"
+  ],
+  "types": "index",
+  "publishConfig": {
+    "access": "public"
+  }
+}

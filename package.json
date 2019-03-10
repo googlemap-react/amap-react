@@ -27,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test:lib --coverage && lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "workspaces": [

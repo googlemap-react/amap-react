@@ -1,6 +1,8 @@
 import React from 'react'
 
-const MapBox = () => null
+const MapBox = () => {
+  return
+}
 
 MapBox.displayName = 'MapBox'
 
