@@ -1,0 +1,82 @@
+{
+  "name": "@googlemap-react/amap",
+  "version": "0.0.1",
+  "description": "Easier-to-use Google Map & React integration",
+  "repository": "git@github.com:googlemap-react/amap-react.git",
+  "author": "Gabriel Wu <qqbbnease1004@126.com>",
+  "homepage": "https://github.com/googlemap-react/amap-react#readme",
+  "bugs": {
+    "url": "https://github.com/googlemap-react/amap-react/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "map",
+    "amap",
+    "react",
+    "react hooks",
+    "react context"
+  ],
+  "source": "index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "umd": "dist/index.umd.js",
+  "dependencies": {
+    "loadjs": "^3.5.5",
+    "uuid": "^3.3.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.11",
+    "@types/loadjs": "3.5.0",
+    "@types/node": "11.11.0",
+    "@types/react": "16.8.7",
+    "@types/react-dom": "16.8.2",
+    "@types/uuid": "3.4.4",
+    "@typescript-eslint/eslint-plugin": "1.4.2",
+    "eslint-plugin-prettier": "3.0.1",
+    "eslint-plugin-react-hooks": "1.5.0",
+    "microbundle": "0.11.0",
+    "react": "16.8.4",
+    "react-docgen-typescript": "1.12.3",
+    "react-dom": "16.8.4",
+    "react-scripts": "2.1.8",
+    "react-styleguidist": "8.0.6",
+    "react-testing-library": "6.0.0",
+    "typescript": "3.3.3333"
+  },
+  "scripts": {
+    "build": "cp ../../*.md . && rm -rf dist && microbundle --jsx React.createElement --strict && rm -rf .rts2_cache_*",
+    "dev": "microbundle --jsx React.createElement --strict --watch --format cjs",
+    "prepublish": "yarn build",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "prettier",
+      "react-hooks"
+    ],
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/__test__helpers__/**"
+    ]
+  }, 
+  "publishConfig": {
+    "access": "public"
+  }
+}
