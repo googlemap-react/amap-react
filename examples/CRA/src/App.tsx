@@ -11,6 +11,9 @@ const App = () => {
             height: '500px',
             width: '100%',
           }}
+          onClick={() => {
+            console.log('map clicked!')
+          }}
         />
       </AMapProvider>
     </>

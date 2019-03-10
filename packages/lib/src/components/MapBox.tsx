@@ -2,7 +2,7 @@ import React, {useEffect, useContext, useState} from 'react'
 import uuid from 'uuid/v1'
 import {MapBoxProps} from '../common/types'
 import {AMapContext} from '../contexts/AMapContext'
-import {useAMapAPI} from '../hooks'
+import {useAMapAPI, useAMapListener} from '../hooks'
 
 const MapBox = ({
   apiKey,
@@ -10,7 +10,35 @@ const MapBox = ({
   opts,
   style,
   LoadedComponent,
-  LoadingComponent,
+  LoadingComponent = 'Loading...',
+  onClick,
+  onComplete,
+  onDoubleClick,
+  onDragEnd,
+  onDragging,
+  onDragStart,
+  onHotSpotClick,
+  onHotSpotOut,
+  onHotSpotOver,
+  onMapMove,
+  onMouseDown,
+  onMouseEnd,
+  onMouseMove,
+  onMouseOut,
+  onMouseOver,
+  onMouseStart,
+  onMouseUp,
+  onMouseWheel,
+  onMoveEnd,
+  onMoveStart,
+  onResize,
+  onRightClick,
+  onTouchEnd,
+  onTouchMove,
+  onTouchStart,
+  onZoomChange,
+  onZoomEnd,
+  onZoomStart,
 }: MapBoxProps) => {
   // Get access to the AMap context
   const {dispatch} = useContext(AMapContext)
@@ -28,7 +56,7 @@ const MapBox = ({
     apiKey: apiKey,
   })
 
-  // Load Google Map
+  // Load AMap
   useEffect(() => {
     if (!loaded) return
     const map = new AMap.Map(
@@ -40,6 +68,53 @@ const MapBox = ({
     initMap(map)
     return () => reset()
   }, [loaded])
+
+  // Register event listeners
+  useAMapListener(map, [
+    {name: 'click', handler: onClick},
+    {name: 'complete', handler: onComplete},
+    {name: 'dblclick', handler: onDoubleClick},
+    {name: 'dragend', handler: onDragEnd},
+    {name: 'dragging', handler: onDragging},
+    {name: 'dragstart', handler: onDragStart},
+    {name: 'hotspotclick', handler: onHotSpotClick},
+    {name: 'hotspotout', handler: onHotSpotOut},
+    {name: 'hotspotover', handler: onHotSpotOver},
+    {name: 'mapmove', handler: onMapMove},
+    {name: 'mousedown', handler: onMouseDown},
+    {name: 'mouseend', handler: onMouseEnd},
+    {name: 'mousemove', handler: onMouseMove},
+    {name: 'mousestart', handler: onMouseStart},
+    {name: 'mouseout', handler: onMouseOut},
+    {name: 'mouseover', handler: onMouseOver},
+    {name: 'mouseup', handler: onMouseUp},
+    {name: 'mousewheel', handler: onMouseWheel},
+    {name: 'moveend', handler: onMoveEnd},
+    {name: 'movestart', handler: onMoveStart},
+    {name: 'resize', handler: onResize},
+    {name: 'rightclick', handler: onRightClick},
+    {name: 'touchend', handler: onTouchEnd},
+    {name: 'touchmove', handler: onTouchMove},
+    {name: 'touchstart', handler: onTouchStart},
+    {name: 'zoomchange', handler: onZoomChange},
+    {name: 'zoomend', handler: onZoomEnd},
+    {name: 'zoomstart', handler: onZoomStart},
+  ])
+
+  useEffect(() => {
+    if (
+      map === undefined ||
+      opts === undefined ||
+      JSON.stringify(opts) === prevOpts
+    )
+      return
+    opts.center && map.setCenter(opts.center)
+    opts.features && map.setFeatures(opts.features)
+    opts.labelzIndex && map.setLabelzIndex(opts.labelzIndex)
+    opts.pitch && map.setPitch(opts.pitch)
+    opts.zoom && map.setZoom(opts.zoom)
+    setPrevOpts(JSON.stringify(opts))
+  }, [opts])
 
   // Render <MapBox>
   return (

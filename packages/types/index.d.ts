@@ -21,6 +21,29 @@ declare namespace AMap {
     province: string
   }
 
+  export class event {
+    static addDomListener(
+      instance: HTMLElement,
+      eventName: string,
+      handler: Function,
+      context?: Object,
+    ): EventListener
+    static addListener(
+      instance: Object,
+      eventName: string,
+      handler: Function,
+      context?: Object,
+    ): EventListener
+    static addListenerOnce(
+      instance: Object,
+      eventName: string,
+      handler: Function,
+      context?: Object,
+    ): EventListener
+    static removeListener(listener: EventListener): void
+    static trigger(instance: Object, eventName: string, extArgs?: Object): void
+  }
+
   export declare type Feature = 'bg' | 'building' | 'point' | 'road'
 
   export class LngLat {
@@ -47,6 +70,7 @@ declare namespace AMap {
     clearMap(): void
     containerToLngLat(pixel: Pixel): LngLat
     destroy(): void
+    detailOnAMAP(obj: Object): void
     getAllOverlays(overlayType?: OverlayType): Overlay[]
     getBounds(): Bounds
     getCenter(): LngLat
@@ -72,6 +96,9 @@ declare namespace AMap {
     panTo(position: LngLat): void
     pixelToLngLat(pixel: Pixel, zoom: number): LngLat
     plugin(name: string | string[], callback: Function): void
+    poiOnAMAP(obj: Object): void
+    off(eventName: string, handler: Function, context?: Object): void
+    on(eventName: string, handler: Function, context?: Object): void
     remove(overlays: Overlay[]): void
     removeControl(obj: Object): void
     setBounds(bounds: Bounds): void
@@ -136,6 +163,20 @@ declare namespace AMap {
     zoom?: number
     zoomEnable?: boolean
     zooms?: number[]
+  }
+
+  export interface MapsEvent {
+    lnglat: LngLat
+    pixel: Pixel
+    target: Object
+    type: string
+  }
+
+  export interface MapsHotSpotEvent {
+    id: string
+    lnglat: LngLat
+    name: string
+    type: string
   }
 
   export declare type Mask = Array<PolygonLiteral | PolygonWithHoleLiteral>
