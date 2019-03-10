@@ -1,6 +1,6 @@
 {
   "name": "@googlemap-react/amap",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
   "description": "Easier-to-use Google Map & React integration",
   "repository": "git@github.com:googlemap-react/amap-react.git",
   "author": "Gabriel Wu <qqbbnease1004@126.com>",
@@ -29,7 +29,7 @@
     "react-dom": "^16.8.0"
   },
   "devDependencies": {
-    "@googlemap-react/amap-types": "0.0.1",
+    "@googlemap-react/amap-types": "^0.0.1-alpha.0",
     "@types/jest": "24.0.11",
     "@types/loadjs": "3.5.0",
     "@types/node": "11.11.0",
