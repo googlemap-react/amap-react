@@ -1,28 +1,22 @@
-import React, {Component} from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from 'react'
+import {AMapProvider, MapBox} from './lib'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    )
-  }
+const App = () => {
+  return (
+    <>
+      <AMapProvider>
+        <MapBox
+          apiKey="36e0a42580b8f766b4bfe2a5f4169560"
+          style={{
+            height: '500px',
+            width: '100%',
+          }}
+        />
+      </AMapProvider>
+    </>
+  )
 }
+
+App.displayName = 'App'
 
 export default App

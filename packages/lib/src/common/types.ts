@@ -19,3 +19,12 @@ export interface AMapAction {
 export interface AMapProviderProps {
   children: React.ReactNode
 }
+
+export interface MapBoxProps {
+  apiKey: string
+  className?: string
+  opts?: AMap.MapOptions
+  style?: React.CSSProperties
+  LoadingComponent?: React.ReactNode
+  LoadedComponent?: React.ReactNode
+}

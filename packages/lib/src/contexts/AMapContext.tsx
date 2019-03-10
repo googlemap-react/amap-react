@@ -18,6 +18,10 @@ const AMapContext = React.createContext<AMapReducer>({
 const reducer = (state: AMapState, action: AMapAction) => {
   switch (action.type) {
     case 'reset':
+      if (state.map !== undefined) {
+        state.map.clearMap()
+        state.map.destroy()
+      }
       return initialState()
 
     case 'init_map':
