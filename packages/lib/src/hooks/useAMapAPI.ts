@@ -17,7 +17,7 @@ const useAMapAPI = ({apiKey}: AMapAPIProps) => {
       },
       error: () => {
         loadjs.reset()
-        console.error('Unable to fetch AMap sdk')
+        console.warn('Unable to fetch AMap sdk')
       },
     })
   }, [])
