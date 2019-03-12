@@ -23,10 +23,28 @@ export interface AMapProviderProps {
   children: React.ReactNode
 }
 
+export interface InfoWindowOptions extends AMap.InfoWindowOptions {
+  position?: AMap.LngLatLiteral
+}
+
+export interface InfoWindowProps {
+  children?: React.ReactNode
+  anchorId?: string
+  opts?: InfoWindowOptions
+  visible?: boolean
+  onChange?: () => void
+  onClose?: () => void
+  onOpen?: () => void
+}
+
+export interface MapBoxOptions extends AMap.MapOptions {
+  center?: AMap.LngLatLiteral
+}
+
 export interface MapBoxProps {
   apiKey: string
   className?: string
-  opts?: AMap.MapOptions
+  opts?: MapOptions
   style?: React.CSSProperties
   LoadingComponent?: React.ReactNode
   LoadedComponent?: React.ReactNode
@@ -60,10 +78,14 @@ export interface MapBoxProps {
   onZoomStart?: () => void
 }
 
+export interface MarkerOptions extends AMap.MarkerOptions {
+  position?: AMap.LngLatLiteral
+}
+
 export interface MarkerProps {
   children?: React.ReactNode
   id?: string
-  opts?: AMap.MarkerOptions
+  opts?: MarkerOptions
   onClick?: (event: AMap.MapsEvent) => void
   onDoubleClick?: (event: AMap.MapsEvent) => void
   onDragEnd?: (event: AMap.MapsEvent) => void

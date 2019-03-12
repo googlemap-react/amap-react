@@ -61,7 +61,16 @@ const MapBox = ({
     if (!loaded) return
     const map = new AMap.Map(
       document.getElementById(mapItemId) as HTMLDivElement,
-      opts,
+      {
+        ...opts,
+        center: opts.center
+          ? new AMap.LngLat(
+              opts.center.lng,
+              opts.center.lat,
+              opts.center.noAutoFix,
+            )
+          : undefined,
+      },
     )
     setMap(map)
     setPrevOpts(JSON.stringify(opts))
@@ -108,7 +117,14 @@ const MapBox = ({
       JSON.stringify(opts) === prevOpts
     )
       return
-    opts.center && map.setCenter(opts.center)
+    opts.center &&
+      map.setCenter(
+        new AMap.LngLat(
+          opts.center.lng,
+          opts.center.lat,
+          opts.center.noAutoFix,
+        ),
+      )
     opts.features && map.setFeatures(opts.features)
     opts.labelzIndex && map.setLabelzIndex(opts.labelzIndex)
     opts.lang && map.setLang(opts.lang)

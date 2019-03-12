@@ -5,7 +5,10 @@ interface AMapEvent {
   handler?: Function
 }
 
-const useAMapListener = (instance: Object | undefined, events: AMapEvent[]) => {
+const useAMapListener = (
+  instance: AMap.MVCObject | undefined,
+  events: AMapEvent[],
+) => {
   useEffect(() => {
     if (instance === undefined) return
     const listeners: any[] = []

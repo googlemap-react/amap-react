@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import ReactDOM from 'react-dom'
 import uuid from 'uuid/v1'
-import {DEFAULT_MARKER_OPTIONS} from '../common/constants'
 import {MarkerProps} from '../common/types'
 import {AMapContext} from '../contexts/AMapContext'
 import {useAMapListener} from '../hooks'
@@ -9,7 +8,7 @@ import {useAMapListener} from '../hooks'
 const Marker = ({
   children,
   id,
-  opts = DEFAULT_MARKER_OPTIONS,
+  opts = {},
   onClick,
   onDoubleClick,
   onDragEnd,
@@ -37,8 +36,12 @@ const Marker = ({
 
   const addMarker = (marker: AMap.Marker) =>
     dispatch({type: 'add_object', object: marker, id: markerId})
-
   const removeMarker = () => dispatch({type: 'remove_object', id: markerId})
+  const positionChangedHandler = () =>
+    marker &&
+    AMap.event.trigger(marker, 'position_changed', {
+      position: marker.getPosition(),
+    })
 
   useEffect(() => {
     if (state.map === undefined) return
@@ -46,6 +49,13 @@ const Marker = ({
       ...opts,
       map: state.map,
       content: !!children ? container : opts.content,
+      position: opts.position
+        ? new AMap.LngLat(
+            opts.position.lng,
+            opts.position.lat,
+            opts.position.noAutoFix,
+          )
+        : undefined,
     })
     setMarker(marker)
     setPrevOpts(JSON.stringify(opts))
@@ -62,6 +72,8 @@ const Marker = ({
     {name: 'click', handler: onClick},
     {name: 'dblclick', handler: onDoubleClick},
     {name: 'dragend', handler: onDragEnd},
+    {name: 'dragend', handler: positionChangedHandler},
+    {name: 'dragging', handler: positionChangedHandler},
     {name: 'dragging', handler: onDragging},
     {name: 'dragstart', handler: onDragStart},
     {name: 'mousedown', handler: onMouseDown},
@@ -71,7 +83,9 @@ const Marker = ({
     {name: 'mouseup', handler: onMouseUp},
     {name: 'movealong', handler: onMoveAlong},
     {name: 'moveend', handler: onMoveEnd},
+    {name: 'moveend', handler: positionChangedHandler},
     {name: 'moving', handler: onMoving},
+    {name: 'moving', handler: positionChangedHandler},
     {name: 'rightclick', handler: onRightClick},
     {name: 'touchend', handler: onTouchEnd},
     {name: 'touchmove', handler: onTouchMove},
@@ -95,7 +109,14 @@ const Marker = ({
     opts.icon && marker.setIcon(opts.icon)
     opts.label && marker.setLabel(opts.label)
     opts.offset && marker.setOffset(opts.offset)
-    opts.position && marker.setPosition(opts.position)
+    opts.position &&
+      marker.setPosition(
+        new AMap.LngLat(
+          opts.position.lng,
+          opts.position.lat,
+          opts.position.noAutoFix,
+        ),
+      )
     opts.raiseOnDrag && marker.setRaiseOnDrag(opts.raiseOnDrag)
     opts.shadow && marker.setShadow(opts.shadow)
     opts.shape && marker.setShape(opts.shape)

@@ -43,13 +43,13 @@ declare namespace AMap {
       context?: Object,
     ): EventListener
     static addListener(
-      instance: Object,
+      instance: MVCObject,
       eventName: string,
       handler: Function,
       context?: Object,
     ): EventListener
     static addListenerOnce(
-      instance: Object,
+      instance: MVCObject,
       eventName: string,
       handler: Function,
       context?: Object,
@@ -60,8 +60,35 @@ declare namespace AMap {
 
   export declare type Feature = 'bg' | 'building' | 'point' | 'road'
 
+  export class InfoWindow extends MVCObject {
+    constructor(opts: InfoWindowOptions)
+    close(): void
+    getAnchor(): Anchor
+    getContent(): string | HTMLElement
+    getIsOpen(): boolean
+    getPosition(): LngLat
+    getSize(): Size
+    open(map: Map, position: LngLat): void
+    setAnchor(anchor: Anchor): void
+    setContent(content: string | HTMLElement): void
+    setPosition(position: LngLat): void
+    setSize(size: Size): void
+  }
+
+  export interface InfoWindowOptions {
+    anchor?: Anchor
+    autoMove?: boolean
+    closeWhenClickMap?: boolean
+    content?: string | HTMLElement
+    isCustom?: boolean
+    offset?: Pixel
+    position?: LngLat
+    showShadow?: boolean
+    size?: Size
+  }
+
   export class LngLat {
-    constructor(lng: number, lat: Number, noAutofix: boolean)
+    constructor(lng: number, lat: number, noAutofix?: boolean)
     distance(lngLat: LngLat | Array<LngLat>): number
     equals(lngLat: LngLat): boolean
     getLat(): number
@@ -73,9 +100,10 @@ declare namespace AMap {
   export interface LngLatLiteral {
     lng: number
     lat: number
+    noAutoFix?: boolean
   }
 
-  export class Map {
+  export class Map extends MVCObject {
     constructor(container: string | HTMLDivElement, opts?: MapOptions)
     add(overlays: Overlay[]): void
     addControl(obj: Object): void
@@ -111,8 +139,6 @@ declare namespace AMap {
     pixelToLngLat(pixel: Pixel, zoom: number): LngLat
     plugin(name: string | string[], callback: Function): void
     poiOnAMAP(obj: Object): void
-    off(eventName: string, handler: Function, context?: Object): void
-    on(eventName: string, handler: Function, context?: Object): void
     remove(overlays: Overlay[]): void
     removeControl(obj: Object): void
     setBounds(bounds: Bounds): void
@@ -194,13 +220,13 @@ declare namespace AMap {
     type: string
   }
 
-  export class Marker {
+  export class Marker extends MVCObject {
     constructor(opts: MarkerOptions)
     getAnchor(): Anchor
     getAngle(): number
     getAnimation(): Animation
     getClickable(): boolean
-    getContent(): string
+    getContent(): string | HTMLElement
     getDraggable(): boolean
     getExtData(): any
     getIcon(): string | Icon
@@ -278,6 +304,11 @@ declare namespace AMap {
 
   export declare type Mask = Array<PolygonLiteral | PolygonWithHoleLiteral>
 
+  export class MVCObject {
+    off(eventName: string, handler: Function, context?: Object): void
+    on(eventName: string, handler: Function, context?: Object): void
+  }
+
   export declare type OverlayType = 'circle' | 'marker' | 'polyline' | 'polygon'
 
   export class Pixel {
@@ -340,7 +371,7 @@ declare namespace AMap {
     zoomEnable?: boolean
   }
 
-  export class TileLayer {
+  export class TileLayer extends MVCObject {
     constructor(opts: TileLayerOptions)
     getTiles(): Array
     getZooms(): number[]
