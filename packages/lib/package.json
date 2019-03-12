@@ -1,7 +1,7 @@
 {
   "name": "@googlemap-react/amap",
   "version": "0.0.1-alpha.1",
-  "description": "Easier-to-use Google Map & React integration",
+  "description": "Easier-to-use React integration for AMap",
   "repository": "git@github.com:googlemap-react/amap-react.git",
   "author": "Gabriel Wu <qqbbnease1004@126.com>",
   "homepage": "https://github.com/googlemap-react/amap-react#readme",

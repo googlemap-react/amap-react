@@ -1,7 +1,8 @@
 import React from 'react'
-import {AMapProvider, MapBox} from './lib'
+import {AMapProvider, MapBox, Marker} from './lib'
 
 const App = () => {
+  const [count, setCount] = React.useState(0)
   return (
     <>
       <AMapProvider>
@@ -14,7 +15,20 @@ const App = () => {
           onClick={() => {
             console.log('map clicked!')
           }}
+          opts={{
+            zoom: 13,
+          }}
         />
+        <Marker
+          opts={{
+            draggable: true,
+          }}
+          onClick={() => {
+            setCount(count => count + 1)
+          }}
+        >
+          <p>{count}</p>
+        </Marker>
       </AMapProvider>
     </>
   )

@@ -8,6 +8,7 @@ import {
 
 const initialState = (): AMapState => ({
   map: undefined,
+  objects: new Map<string, Object>(),
 })
 
 const AMapContext = React.createContext<AMapReducer>({
@@ -32,28 +33,27 @@ const reducer = (state: AMapState, action: AMapAction) => {
 
       return {...state, map: action.map}
 
-    // case 'add_object':
-    //   if (action.object === undefined)
-    //     throw new Error('You should specify an object instance')
-    //   if (action.id === undefined) throw new Error('You should specify an id')
-    //   if (state.objects.has(action.id))
-    //     throw new Error('The id has already been taken')
-    //   state.objects.set(action.id, action.object)
+    case 'add_object':
+      if (action.object === undefined)
+        throw new Error('You should specify an object instance')
+      if (action.id === undefined) throw new Error('You should specify an id')
+      if (state.objects.has(action.id))
+        throw new Error('The id has already been taken')
+      state.objects.set(action.id, action.object)
 
-    //   return state
+      return state
 
-    // case 'remove_object':
-    //   if (action.id === undefined) throw new Error('You should specify an id')
-    //   const objectToRemove = state.objects.get(action.id)
-    //   if (objectToRemove === undefined)
-    //     throw new Error('There is no object with the given id')
+    case 'remove_object':
+      if (action.id === undefined) throw new Error('You should specify an id')
+      const objectToRemove = state.objects.get(action.id)
+      if (objectToRemove === undefined)
+        throw new Error('There is no object with the given id')
 
-    //   // If the object can setMap, then setMap to null
-    //   if ((objectToRemove as AMapObjectWithSetMap).setMap)
-    //     (objectToRemove as AMapObjectWithSetMap).setMap(null)
-    //   state.objects.delete(action.id)
+      // If the object can setMap, then setMap to null
+      if ((objectToRemove as any).setMap) (objectToRemove as any).setMap(null)
+      state.objects.delete(action.id)
 
-    //   return state
+      return state
 
     default:
       return state

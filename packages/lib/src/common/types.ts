@@ -9,11 +9,14 @@ export interface AMapReducer {
 
 export interface AMapState {
   map?: AMap.Map
+  objects: Map<string, Object>
 }
 
 export interface AMapAction {
   type: string
   map?: AMap.Map
+  id?: string
+  object?: Object
 }
 
 export interface AMapProviderProps {
@@ -55,4 +58,27 @@ export interface MapBoxProps {
   onZoomChange?: () => void
   onZoomEnd?: () => void
   onZoomStart?: () => void
+}
+
+export interface MarkerProps {
+  children?: React.ReactNode
+  id?: string
+  opts?: AMap.MarkerOptions
+  onClick?: (event: AMap.MapsEvent) => void
+  onDoubleClick?: (event: AMap.MapsEvent) => void
+  onDragEnd?: (event: AMap.MapsEvent) => void
+  onDragging?: (event: AMap.MapsEvent) => void
+  onDragStart?: (event: AMap.MapsEvent) => void
+  onMouseDown?: (event: AMap.MapsEvent) => void
+  onMouseMove?: (event: AMap.MapsEvent) => void
+  onMouseOver?: (event: AMap.MapsEvent) => void
+  onMouseOut?: (event: AMap.MapsEvent) => void
+  onMouseUp?: (event: AMap.MapsEvent) => void
+  onMoveAlong?: () => void
+  onMoveEnd?: () => void
+  onMoving?: ({passedPath}: {passedPath: AMap.LngLat[]}) => void
+  onRightClick?: (event: AMap.MapsEvent) => void
+  onTouchEnd?: (event: AMap.MapsEvent) => void
+  onTouchMove?: (event: AMap.MapsEvent) => void
+  onTouchStart?: (event: AMap.MapsEvent) => void
 }

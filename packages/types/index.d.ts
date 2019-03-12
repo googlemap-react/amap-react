@@ -1,4 +1,18 @@
 declare namespace AMap {
+  export declare type Anchor =
+    | 'top-left'
+    | 'top-center'
+    | 'top-right'
+    | 'middle-left'
+    | 'center'
+    | 'middle-right'
+    | 'bottom-left'
+    | 'bottom-center'
+    | 'bottom-right'
+  export declare type Animation =
+    | 'AMAP_ANIMATION_BOUNCE'
+    | 'AMAP_ANIMATION_DROP'
+    | 'AMAP_ANIMATION_NONE'
   export class ArrayBounds {
     constructor(bounds: Array<LngLat | Pixel>)
     bounds: Array<LngLat | Pixel>
@@ -152,6 +166,7 @@ declare namespace AMap {
     preloadMode?: boolean
     resizeEnable?: boolean
     rotateEnable?: boolean
+    rotation?: number
     scrollWheel?: boolean
     showBuildingBlock?: boolean
     showIndoorMap?: boolean
@@ -177,6 +192,88 @@ declare namespace AMap {
     lnglat: LngLat
     name: string
     type: string
+  }
+
+  export class Marker {
+    constructor(opts: MarkerOptions)
+    getAnchor(): Anchor
+    getAngle(): number
+    getAnimation(): Animation
+    getClickable(): boolean
+    getContent(): string
+    getDraggable(): boolean
+    getExtData(): any
+    getIcon(): string | Icon
+    getLabel(): MarkerLabel
+    getMap(): Map
+    getOffset(): Pixel
+    getPosition(): LngLat
+    getShadow(): Icon
+    getShape(): MarkerShape
+    getTitle(): string
+    getTop(): boolean
+    getzIndex(): number
+    hide(): void
+    markOnAMAP(obj: Object): void
+    moveAlong(
+      path: LngLat[],
+      speed: number,
+      callback?: Function,
+      circlable?: boolean,
+    ): void
+    moveTo(position: LngLat, speed: number, callback?: Function): void
+    pauseMove(): void
+    resumeMove(): void
+    setAnchor(anchor: Anchor): void
+    setAngle(angle: number): void
+    setClickable(clickable: boolean): void
+    setContent(content: string | HTMLElement): void
+    setCursor(cursor: string): void
+    setDraggable(draggable: boolean): void
+    setExtData(extData: any): void
+    setIcon(icon: string | Icon): void
+    setLabel(label: MarkerLabel): void
+    setMap(map: Map): void
+    setOffset(offset: Pixel): void
+    setPosition(position: LngLat): void
+    setRaiseOnDrag(raiseOnDrag: boolean): void
+    setShadow(icon: Icon): void
+    setShape(shape: MarkerShape): void
+    setTitle(title: string): void
+    setTop(isTop: boolean): void
+    setzIndex(zIndex: number): void
+    show(): void
+    stopMove(): void
+  }
+
+  export interface MarkerLabel {
+    content?: string
+    offset?: Pixel
+  }
+
+  export interface MarkerOptions {
+    anchor?: Anchor
+    angle?: number
+    animation?: Animation
+    autoRotation?: boolean
+    bubble?: boolean
+    clickable?: boolean
+    content?: string | HTMLElement
+    cursor?: string
+    draggable?: boolean
+    extData?: any
+    icon?: string | Icon
+    label?: MarkerLabel
+    map?: Map
+    offset?: Pixel
+    position?: LngLat
+    raiseOnDrag?: boolean
+    shadow?: Icon
+    shape?: MarkerShape
+    title?: string
+    topWhenClick?: boolean
+    visible?: boolean
+    zIndex?: number
   }
 
   export declare type Mask = Array<PolygonLiteral | PolygonWithHoleLiteral>
