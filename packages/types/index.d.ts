@@ -1,5 +1,5 @@
 declare namespace AMap {
-  export declare type Anchor =
+  export type Anchor =
     | 'top-left'
     | 'top-center'
     | 'top-right'
@@ -9,7 +9,7 @@ declare namespace AMap {
     | 'bottom-left'
     | 'bottom-center'
     | 'bottom-right'
-  export declare type Animation =
+  export type Animation =
     | 'AMAP_ANIMATION_BOUNCE'
     | 'AMAP_ANIMATION_DROP'
     | 'AMAP_ANIMATION_NONE'
@@ -26,6 +26,18 @@ declare namespace AMap {
     getNorthEast(): LngLat
     getSouthWest(): LngLat
     toString(): string
+  }
+
+  export interface Building {
+    floor: number
+    floor_details: {
+      floor_indexes: number[]
+      floor_names: string[]
+      floor_nonas: string[]
+    }
+    id: string
+    lnglat: LngLat
+    name: string
   }
 
   export interface City {
@@ -58,7 +70,48 @@ declare namespace AMap {
     static trigger(instance: Object, eventName: string, extArgs?: Object): void
   }
 
-  export declare type Feature = 'bg' | 'building' | 'point' | 'road'
+  export type Feature = 'bg' | 'building' | 'point' | 'road'
+
+  export class Icon extends MVCObject {
+    constructor(opts: IconOptions)
+    getImageSize(): Size
+    setImageSize(size: Size): void
+  }
+
+  export interface IconLiteral extends IconOptions {}
+
+  export interface IconOptions {
+    image: string
+    imageOffset: Pixel
+    imageSize: Size
+    size: Size
+  }
+
+  export class IndoorMap extends MVCObject {
+    constructor(opts: IndoorMapOptions)
+    getOpacity(): number
+    getSelectedBuilding(): Building
+    getSelectedBuildingId(): string
+    hide(): void
+    hideFloorBar(): void
+    hideLabels(): void
+    setMap(map: Map): void
+    setOpacity(opacity: number): void
+    setzIndex(zIndex: number): void
+    show(): void
+    showFloor(floor: number, noMove?: boolean): void
+    showFloorBar(): void
+    showIndoorMap(indoorId: string, floor?: number, shopId?: string): void
+    showLabels(): void
+  }
+
+  export interface IndoorMapOptions {
+    alwaysShow: boolean
+    cursor: string
+    hideFloorBar: boolean
+    opacity: number
+    zIndex: number
+  }
 
   export class InfoWindow extends MVCObject {
     constructor(opts: InfoWindowOptions)
@@ -113,6 +166,7 @@ declare namespace AMap {
     containerToLngLat(pixel: Pixel): LngLat
     destroy(): void
     detailOnAMAP(obj: Object): void
+    geodeticCoordToLngLat(pixel: Pixel): LngLat
     getAllOverlays(overlayType?: OverlayType): Overlay[]
     getBounds(): Bounds
     getCenter(): LngLat
@@ -131,8 +185,10 @@ declare namespace AMap {
     getScale(dpi: number): number
     getStatus(): Status
     getSize(): Size
+    getViewMode_(): ViewMode
     getZoom(): number
     lngLatToContainer(lngLat: LngLat): Pixel
+    lngLatToGeodeticCoord(lnglat: LngLat): Pixel
     lnglatToPixel(lngLat: LngLat, zoom: number): Pixel
     panBy(x: number, y: number): void
     panTo(position: LngLat): void
@@ -187,6 +243,7 @@ declare namespace AMap {
     layers?: TileLayer[]
     mapStyle?: string
     mask?: Mask
+    maxPitch?: number
     pitch?: number
     pitchEnable?: boolean
     preloadMode?: boolean
@@ -288,7 +345,7 @@ declare namespace AMap {
     cursor?: string
     draggable?: boolean
     extData?: any
-    icon?: string | Icon
+    icon?: string | Icon | IconLiteral
     label?: MarkerLabel
     map?: Map
     offset?: Pixel | PixelLiteral
@@ -302,7 +359,16 @@ declare namespace AMap {
     zIndex?: number
   }
 
-  export declare type Mask = Array<PolygonLiteral | PolygonWithHoleLiteral>
+  export class MarkerShape extends MVCObject {
+    constructor(opts: MarkerShapeOptions)
+  }
+
+  export interface MarkerShapeOptions {
+    coords: number[]
+    type: 'circle' | 'poly' | 'rect'
+  }
+
+  export type Mask = Array<PolygonLiteral | PolygonWithHoleLiteral>
 
   export class MVCObject {
     off(eventName: string, handler: Function, context?: Object): void
@@ -327,6 +393,13 @@ declare namespace AMap {
   export declare type PolygonLiteral = LngLatLiteral[]
 
   export declare type PolygonWithHoleLiteral = PolygonLiteral[]
+
+  export interface Shop {
+    building_id: string
+    id: string
+    lnglat: LngLat
+    name: string
+  }
 
   class RoadNet extends TileLayer {
     constructor(opts: RoadNetOptions)
@@ -378,7 +451,7 @@ declare namespace AMap {
 
   export class TileLayer extends MVCObject {
     constructor(opts: TileLayerOptions)
-    getTiles(): Array
+    getTiles(): string[]
     getZooms(): number[]
     hide(): void
     reload(): void

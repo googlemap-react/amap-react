@@ -79,6 +79,7 @@ export interface MapBoxProps {
 }
 
 export interface MarkerOptions extends AMap.MarkerOptions {
+  icon?: string | AMap.IconLiteral
   position?: AMap.LngLatLiteral
 }
 

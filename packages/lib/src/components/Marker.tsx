@@ -49,6 +49,11 @@ const Marker = ({
       ...opts,
       map: state.map,
       content: !!children ? container : opts.content,
+      icon: opts.icon
+        ? typeof opts.icon === 'string'
+          ? opts.icon
+          : new AMap.Icon(opts.icon)
+        : undefined,
       position: opts.position
         ? new AMap.LngLat(
             opts.position.lng,
@@ -106,7 +111,10 @@ const Marker = ({
     opts.cursor && marker.setCursor(opts.cursor)
     opts.draggable && marker.setDraggable(opts.draggable)
     opts.extData && marker.setExtData(opts.extData)
-    opts.icon && marker.setIcon(opts.icon)
+    opts.icon &&
+      marker.setIcon(
+        typeof opts.icon === 'string' ? opts.icon : new AMap.Icon(opts.icon),
+      )
     opts.label && marker.setLabel(opts.label)
     opts.offset && marker.setOffset(opts.offset)
     opts.position &&
