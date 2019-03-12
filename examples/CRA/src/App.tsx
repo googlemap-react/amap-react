@@ -1,4 +1,5 @@
 import React from 'react'
+import Pentagram from './components/Pentagram'
 import {AMapProvider, InfoWindow, MapBox, Marker} from './lib'
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
               lng: 116.4,
               lat: 39.9,
             },
-            zoom: 13,
+            zoom: 17,
           }}
         />
         <Marker
@@ -36,17 +37,7 @@ const App = () => {
             setCount(count => count + 1)
           }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            version="1.1"
-            width="38"
-            height="36"
-          >
-            <polygon
-              points="20,0 32,36 2,12 38,12 8,36"
-              style={{fill: 'red', stroke: 'red', strokeWidth: 1}}
-            />
-          </svg>
+          <Pentagram size={2} />
         </Marker>
         <InfoWindow
           anchorId="marker"
