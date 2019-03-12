@@ -7,7 +7,7 @@ import {useAMapAPI, useAMapListener} from '../hooks'
 const MapBox = ({
   apiKey,
   className,
-  opts,
+  opts = {},
   style,
   LoadedComponent,
   LoadingComponent = 'Loading...',

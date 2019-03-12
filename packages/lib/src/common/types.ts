@@ -44,7 +44,7 @@ export interface MapBoxOptions extends AMap.MapOptions {
 export interface MapBoxProps {
   apiKey: string
   className?: string
-  opts?: MapOptions
+  opts?: MapBoxOptions
   style?: React.CSSProperties
   LoadingComponent?: React.ReactNode
   LoadedComponent?: React.ReactNode

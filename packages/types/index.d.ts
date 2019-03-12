@@ -81,8 +81,8 @@ declare namespace AMap {
     closeWhenClickMap?: boolean
     content?: string | HTMLElement
     isCustom?: boolean
-    offset?: Pixel
-    position?: LngLat
+    offset?: Pixel | PixelLiteral
+    position?: LngLat | LngLatLiteral
     showShadow?: boolean
     size?: Size
   }
@@ -170,7 +170,7 @@ declare namespace AMap {
   export interface MapOptions {
     animateEnable?: boolean
     buildingAnimation?: boolean
-    center?: LngLat
+    center?: LngLat | LngLatLiteral
     crs?: string
     defaultCursor?: string
     defaultLayer?: TileLayer
@@ -260,7 +260,7 @@ declare namespace AMap {
     setIcon(icon: string | Icon): void
     setLabel(label: MarkerLabel): void
     setMap(map: Map): void
-    setOffset(offset: Pixel): void
+    setOffset(offset: Pixel | PixelLiteral): void
     setPosition(position: LngLat): void
     setRaiseOnDrag(raiseOnDrag: boolean): void
     setShadow(icon: Icon): void
@@ -274,7 +274,7 @@ declare namespace AMap {
 
   export interface MarkerLabel {
     content?: string
-    offset?: Pixel
+    offset?: Pixel | PixelLiteral
   }
 
   export interface MarkerOptions {
@@ -291,8 +291,8 @@ declare namespace AMap {
     icon?: string | Icon
     label?: MarkerLabel
     map?: Map
-    offset?: Pixel
-    position?: LngLat
+    offset?: Pixel | PixelLiteral
+    position?: LngLat | LngLatLiteral
     raiseOnDrag?: boolean
     shadow?: Icon
     shape?: MarkerShape
@@ -317,6 +317,11 @@ declare namespace AMap {
     getX(): number
     getY(): number
     toString(): string
+  }
+
+  export interface PixelLiteral {
+    x: number
+    y: number
   }
 
   export declare type PolygonLiteral = LngLatLiteral[]
