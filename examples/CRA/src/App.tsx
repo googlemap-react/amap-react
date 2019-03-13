@@ -1,6 +1,7 @@
 import React from 'react'
 import MyBezier from './components/MyBezier'
 import MyCircle from './components/MyCircle'
+import MyEllipse from './components/MyEllipse'
 import MyMapBox from './components/MyMapBox'
 import MyMarker from './components/MyMarker'
 import MyPolygon from './components/MyPolygon'
@@ -19,6 +20,7 @@ const App = () => {
         >
           <option value="bezier">Bezier Curve</option>
           <option value="circle">Circle</option>
+          <option value="ellipse">Ellipse</option>
           <option value="marker">Marker'n'InfoWindow</option>
           <option value="polygon">Polygon with holes</option>
           <option value="polyline">Polyline</option>
@@ -26,6 +28,7 @@ const App = () => {
         <MyMapBox />
         <MyBezier visible={overlay === 'bezier'} />
         <MyCircle visible={overlay === 'circle'} />
+        <MyEllipse visible={overlay === 'ellipse'} />
         <MyMarker
           count={count}
           setCount={setCount}

@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react'
 import uuid from 'uuid/v1'
-import {CircleProps} from '../common/types'
+import {EllipseProps} from '../common/types'
 import {AMapContext} from '../contexts/AMapContext'
 import {useAMapListener, useMemoizedOptions} from '../hooks'
 
-const Circle = ({
+const Ellipse = ({
   id,
   opts = {},
   onChange,
@@ -20,19 +20,19 @@ const Circle = ({
   onTouchEnd,
   onTouchMove,
   onTouchStart,
-}: CircleProps) => {
+}: EllipseProps) => {
   const {state, dispatch} = useContext(AMapContext)
   const [prevOpts, setPrevOpts] = useState('')
-  const [circle, setCircle] = useState<AMap.Circle | undefined>(undefined)
-  const [circleId] = useState(id ? id : `circle-${uuid()}`)
+  const [ellipse, setEllipse] = useState<AMap.Ellipse | undefined>(undefined)
+  const [ellipseId] = useState(id ? id : `ellipse-${uuid()}`)
 
-  const addCircle = (circle: AMap.Circle) =>
-    dispatch({type: 'add_object', object: circle, id: circleId})
-  const removeCircle = () => dispatch({type: 'remove_object', id: circleId})
+  const addEllipse = (ellipse: AMap.Ellipse) =>
+    dispatch({type: 'add_object', object: ellipse, id: ellipseId})
+  const removeEllipse = () => dispatch({type: 'remove_object', id: ellipseId})
 
   useEffect(() => {
     if (state.map === undefined) return
-    const circle = new AMap.Circle({
+    const ellipse = new AMap.Ellipse({
       ...opts,
       map: state.map,
       center: opts.center
@@ -43,18 +43,18 @@ const Circle = ({
           )
         : undefined,
     })
-    setCircle(circle)
+    setEllipse(ellipse)
     setPrevOpts(JSON.stringify(opts))
 
-    // Add the circle to state.objects
-    addCircle(circle)
+    // Add the ellipse to state.objects
+    addEllipse(ellipse)
 
-    // Remove the circle when the component is unmounted
-    return () => removeCircle()
+    // Remove the ellipse when the component is unmounted
+    return () => removeEllipse()
   }, [state.map])
 
   // Register AMap event listeners
-  useAMapListener(circle, [
+  useAMapListener(ellipse, [
     {name: 'change', handler: onChange},
     {name: 'click', handler: onClick},
     {name: 'dblclick', handler: onDoubleClick},
@@ -70,12 +70,12 @@ const Circle = ({
     {name: 'touchstart', handler: onTouchStart},
   ])
 
-  // Modify the AMap.Circle object when component props change
-  useMemoizedOptions(circle, opts, prevOpts, setPrevOpts)
+  // Modify the AMap.Ellipse object when component props change
+  useMemoizedOptions(ellipse, opts, prevOpts, setPrevOpts)
 
   return null
 }
 
-Circle.displayName = 'Circle'
+Ellipse.displayName = 'Ellipse'
 
-export default Circle
+export default Ellipse

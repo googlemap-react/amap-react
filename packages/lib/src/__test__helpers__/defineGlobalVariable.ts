@@ -25,6 +25,16 @@ class Circle {
   }
 }
 
+class Ellipse {
+  opts: AMap.EllipseOptions
+  setOptions = (opts: AMap.EllipseOptions) => {
+    this.opts = opts
+  }
+  constructor(opts: AMap.EllipseOptions) {
+    this.opts = opts
+  }
+}
+
 class Icon {
   constructor(opts: AMap.IconOptions) {}
 }
@@ -151,6 +161,7 @@ const defineGlobalVariable = () => {
       BezierCurve: BezierCurve,
       Bounds: Bounds,
       Circle: Circle,
+      Ellipse: Ellipse,
       event: {
         addListener: () => {},
         removeListener: () => {},

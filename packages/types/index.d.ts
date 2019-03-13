@@ -108,6 +108,19 @@ declare namespace AMap {
     province: string
   }
 
+  export class Ellipse extends BasicShape {
+    constructor(opts: EllipseOptions)
+    getCenter(): LngLat
+    getOptions(): EllipseOptions
+    setCenter(center: LngLat): void
+    setOptions(opts: EllipseOptions): void
+  }
+
+  export interface EllipseOptions extends BasicShapeOptions {
+    center?: LngLat | LngLatLiteral
+    radius?: number[]
+  }
+
   export class event {
     static addDomListener(
       instance: HTMLElement,

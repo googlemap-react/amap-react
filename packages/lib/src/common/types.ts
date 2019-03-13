@@ -52,6 +52,14 @@ export interface CircleProps extends BasicShapeProps {
   opts?: CircleOptions
 }
 
+export interface EllipseOptions extends AMap.EllipseOptions {
+  center?: AMap.LngLatLiteral
+}
+
+export interface EllipseProps extends BasicShapeProps {
+  opts?: EllipseOptions
+}
+
 export interface InfoWindowOptions extends AMap.InfoWindowOptions {
   position?: AMap.LngLatLiteral
 }
