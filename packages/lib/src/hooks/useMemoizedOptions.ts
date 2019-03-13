@@ -16,6 +16,20 @@ const useMemoizedOptions = (
       return
     instance.setOptions({
       ...opts,
+      bounds: opts.bounds
+        ? new AMap.Bounds(
+            new AMap.LngLat(
+              opts.bounds.southWest.lng,
+              opts.bounds.southWest.lat,
+              opts.bounds.southWest.noAutoFix,
+            ),
+            new AMap.LngLat(
+              opts.bounds.northEast.lng,
+              opts.bounds.northEast.lat,
+              opts.bounds.northEast.noAutoFix,
+            ),
+          )
+        : undefined,
       center: opts.center
         ? new AMap.LngLat(
             opts.center.lng,

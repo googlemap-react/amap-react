@@ -4,6 +4,7 @@ export {default as Ellipse} from './src/components/Ellipse'
 export {default as InfoWindow} from './src/components/InfoWindow'
 export {default as MapBox} from './src/components/MapBox'
 export {default as Marker} from './src/components/Marker'
+export {default as Rectangle} from './src/components/Rectangle'
 export {default as Polygon} from './src/components/Polygon'
 export {default as Polyline} from './src/components/Polyline'
 export {

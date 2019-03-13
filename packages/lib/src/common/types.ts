@@ -143,6 +143,14 @@ export interface MarkerProps {
   onTouchStart?: (event: AMap.MapsEvent) => void
 }
 
+export interface RectangleOptions extends AMap.RectangleOptions {
+  bounds?: AMap.BoundsLiteral
+}
+
+export interface RectangleProps extends BasicShapeProps {
+  opts?: RectangleOptions
+}
+
 export interface PolygonOptions extends AMap.PolygonOptions {
   path?: AMap.LngLatLiteral[]
   path2D?: AMap.LngLatLiteral[][]

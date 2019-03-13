@@ -76,6 +76,11 @@ declare namespace AMap {
     toString(): string
   }
 
+  export interface BoundsLiteral {
+    southWest: LngLatLiteral
+    northEast: LngLatLiteral
+  }
+
   export interface Building {
     floor: number
     floor_details: {
@@ -90,6 +95,7 @@ declare namespace AMap {
 
   export class Circle extends BasicShape {
     constructor(opts: CircleOptions)
+    contains(point: LngLat): boolean
     getCenter(): LngLat
     getOptions(): CircleOptions
     setCenter(center: LngLat): void
@@ -110,6 +116,7 @@ declare namespace AMap {
 
   export class Ellipse extends BasicShape {
     constructor(opts: EllipseOptions)
+    contains(point: LngLat): boolean
     getCenter(): LngLat
     getOptions(): EllipseOptions
     setCenter(center: LngLat): void
@@ -505,11 +512,16 @@ declare namespace AMap {
     showDir?: boolean
   }
 
-  export interface Shop {
-    building_id: string
-    id: string
-    lnglat: LngLat
-    name: string
+  export class Rectangle extends BasicShape {
+    constructor(opts: RectangleOptions)
+    contains(point: LngLat): boolean
+    getOptions(): RectangleOptions
+    setBounds(bounds: Bounds): void
+    setOptions(opts: RectangleOptions): void
+  }
+
+  export interface RectangleOptions extends BasicShapeOptions {
+    bounds?: Bounds | BoundsLiteral
   }
 
   class RoadNet extends TileLayer {
@@ -536,6 +548,13 @@ declare namespace AMap {
     opacity?: number
     zIndex?: number
     zooms?: number[]
+  }
+
+  export interface Shop {
+    building_id: string
+    id: string
+    lnglat: LngLat
+    name: string
   }
 
   export class Size {

@@ -151,6 +151,17 @@ class Polyline {
     this.opts = opts
   }
 }
+
+class Rectangle {
+  opts: AMap.RectangleOptions
+  setOptions = (opts: AMap.RectangleOptions) => {
+    this.opts = opts
+  }
+  constructor(opts: AMap.RectangleOptions) {
+    this.opts = opts
+  }
+}
+
 class Size {
   constructor(width: number, height: number) {}
 }
@@ -174,6 +185,7 @@ const defineGlobalVariable = () => {
       Pixel: Pixel,
       Polygon: Polygon,
       Polyline: Polyline,
+      Rectangle: Rectangle,
       Size: Size,
     },
     writable: true,
