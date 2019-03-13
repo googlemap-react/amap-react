@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 
 const useMemoizedOptions = (
-  instance: AMap.Polygon | undefined,
+  instance: AMap.Polygon | AMap.Polyline | undefined,
   opts: any,
   prevOpts: string,
   setPrevOpts: React.Dispatch<React.SetStateAction<string>>,

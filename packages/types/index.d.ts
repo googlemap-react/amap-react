@@ -368,7 +368,7 @@ declare namespace AMap {
     type: 'circle' | 'poly' | 'rect'
   }
 
-  export type Mask = Array<PolygonLiteral | PolygonWithHoleLiteral>
+  export type Mask = Array<LngLatLiteral[] | LngLatLiteral[][]>
 
   export class MVCObject {
     off(eventName: string, handler: Function, context?: Object): void
@@ -402,11 +402,9 @@ declare namespace AMap {
     hide(): any
     setExtData(extData: any): void
     setOptions(opts: PolygonOptions): void
-    setPath(path: PolygonLiteral | PolygonWithHoleLiteral): void
+    setPath(path: LngLat[] | LngLat[][]): void
     show(): any
   }
-
-  export type PolygonLiteral = LngLatLiteral[]
 
   export interface PolygonOptions {
     bubble?: boolean
@@ -425,7 +423,42 @@ declare namespace AMap {
     zIndex?: number
   }
 
-  export type PolygonWithHoleLiteral = PolygonLiteral[]
+  export class Polyline extends MVCObject {
+    constructor(opts: PolylineOptions)
+    contains(point: LngLat): boolean
+    getBounds(): Bounds
+    getExtData(): any
+    getLength(): number
+    getOptions(): PolylineOptions
+    hide(): any
+    setExtData(extData: any): void
+    setOptions(opts: PolylineOptions): void
+    setPath(path: LngLat[]): void
+    show(): any
+  }
+
+  export interface PolylineOptions {
+    bubble?: boolean
+    cursor?: string
+    draggable?: boolean
+    extData?: any
+    fillColor?: string
+    fillOpacity?: number
+    geodesic?: boolean
+    isOutline?: boolean
+    lineCap?: 'butt' | 'round' | 'square'
+    lineJoin?: 'miter' | 'round' | 'bevel'
+    map?: Map
+    outlineColor?: string
+    path?: LngLat[] | LngLatLiteral[]
+    showDir?: boolean
+    strokeColor?: string
+    strokeDasharray?: number[]
+    strokeOpacity?: number
+    strokeStyle?: 'solid' | 'dashed'
+    strokeWeight?: number
+    zIndex?: number
+  }
 
   export interface Shop {
     building_id: string

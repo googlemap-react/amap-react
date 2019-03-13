@@ -78,6 +78,15 @@ class Polygon {
   }
 }
 
+class Polyline {
+  opts: AMap.PolylineOptions
+  setOptions = (opts: AMap.PolylineOptions) => {
+    this.opts = opts
+  }
+  constructor(opts: AMap.PolylineOptions) {
+    this.opts = opts
+  }
+}
 class Size {
   constructor(width: number, height: number) {}
 }
@@ -96,6 +105,7 @@ const defineGlobalVariable = () => {
       Marker: Marker,
       Pixel: Pixel,
       Polygon: Polygon,
+      Polyline: Polyline,
       Size: Size,
     },
     writable: true,

@@ -128,3 +128,25 @@ export interface PolygonProps {
   onTouchMove?: (event: AMap.MapsEvent) => void
   onTouchStart?: (event: AMap.MapsEvent) => void
 }
+
+export interface PolylineOptions extends AMap.PolylineOptions {
+  path?: AMap.LngLatLiteral[]
+}
+
+export interface PolylineProps {
+  id?: string
+  opts?: PolylineOptions
+  onChange?: () => void
+  onClick?: (event: AMap.MapsEvent) => void
+  onDoubleClick?: (event: AMap.MapsEvent) => void
+  onHide?: (type: string, target: Object) => void
+  onMouseDown?: (event: AMap.MapsEvent) => void
+  onMouseOver?: (event: AMap.MapsEvent) => void
+  onMouseOut?: (event: AMap.MapsEvent) => void
+  onMouseUp?: (event: AMap.MapsEvent) => void
+  onRightClick?: (event: AMap.MapsEvent) => void
+  onShow?: (type: string, target: Object) => void
+  onTouchEnd?: (event: AMap.MapsEvent) => void
+  onTouchMove?: (event: AMap.MapsEvent) => void
+  onTouchStart?: (event: AMap.MapsEvent) => void
+}
