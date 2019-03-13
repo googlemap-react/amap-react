@@ -88,6 +88,19 @@ declare namespace AMap {
     name: string
   }
 
+  export class Circle extends BasicShape {
+    constructor(opts: CircleOptions)
+    getCenter(): LngLat
+    getOptions(): CircleOptions
+    setCenter(center: LngLat): void
+    setOptions(opts: CircleOptions): void
+  }
+
+  export interface CircleOptions extends BasicShapeOptions {
+    center?: LngLat | LngLatLiteral
+    radius?: number
+  }
+
   export interface City {
     city: string
     citycode: string

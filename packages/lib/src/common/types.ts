@@ -44,6 +44,14 @@ export interface BezierCurveProps extends BasicShapeProps {
   opts?: AMap.BezierCurveOptions
 }
 
+export interface CircleOptions extends AMap.CircleOptions {
+  center?: AMap.LngLatLiteral
+}
+
+export interface CircleProps extends BasicShapeProps {
+  opts?: CircleOptions
+}
+
 export interface InfoWindowOptions extends AMap.InfoWindowOptions {
   position?: AMap.LngLatLiteral
 }

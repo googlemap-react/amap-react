@@ -16,6 +16,14 @@ const useMemoizedOptions = (
       return
     instance.setOptions({
       ...opts,
+      center:
+        opts.center && type === 'circle'
+          ? new AMap.LngLat(
+              opts.center.lng,
+              opts.center.lat,
+              opts.center.noAutoFix,
+            )
+          : undefined,
       path: opts.path
         ? type === 'bezier-curve'
           ? opts.path

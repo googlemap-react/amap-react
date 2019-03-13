@@ -15,6 +15,16 @@ class Bounds {
   constructor(southWest: number, northEast: number) {}
 }
 
+class Circle {
+  opts: AMap.CircleOptions
+  setOptions = (opts: AMap.CircleOptions) => {
+    this.opts = opts
+  }
+  constructor(opts: AMap.CircleOptions) {
+    this.opts = opts
+  }
+}
+
 class Icon {
   constructor(opts: AMap.IconOptions) {}
 }
@@ -140,6 +150,7 @@ const defineGlobalVariable = () => {
     value: {
       BezierCurve: BezierCurve,
       Bounds: Bounds,
+      Circle: Circle,
       event: {
         addListener: () => {},
         removeListener: () => {},
