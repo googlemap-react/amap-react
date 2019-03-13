@@ -44,12 +44,18 @@ const InfoWindow = ({
   useEffect(() => {
     if (state.map === undefined || infoWindow === undefined) return
     let anchor: any = null
+    let anchorListener: any = null
     if (!!anchorId) {
       anchor = state.objects.get(anchorId)
-      anchor &&
-        AMap.event.addListener(anchor, 'position_changed', (event: any) => {
-          infoWindow.setPosition(event.position)
-        })
+      if (anchor) {
+        anchorListener = AMap.event.addListener(
+          anchor,
+          'position_changed',
+          (event: any) => {
+            infoWindow.setPosition(event.position)
+          },
+        )
+      }
     }
 
     // Open or close the info window according to the `visible` prop
@@ -67,6 +73,10 @@ const InfoWindow = ({
           : state.map.getCenter(), // Fallback: place the info window at the center of the map
       )
     } else infoWindow.close()
+
+    return () => {
+      if (anchorListener) AMap.event.removeListener(anchorListener)
+    }
   }, [infoWindow, anchorId, visible])
 
   // Register event listeners
