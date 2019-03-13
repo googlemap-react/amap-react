@@ -8,7 +8,7 @@ import {defineGlobalVariable} from '../../__test__helpers__'
 
 defineGlobalVariable()
 
-const PATH_WITH_HOLE: AMap.LngLatLiteral[][] = [
+const PATH_2D: AMap.LngLatLiteral[][] = [
   [
     {lng: 116.4, lat: 39.9},
     {lng: 116.5, lat: 39.9},
@@ -66,7 +66,7 @@ describe('Polygon', () => {
           <MapBox apiKey="FAKE_KEY" />
           <Polygon
             opts={{
-              pathWithHole: PATH_WITH_HOLE,
+              path2D: PATH_2D,
             }}
           />
         </AMapProvider>,

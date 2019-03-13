@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react'
 import uuid from 'uuid/v1'
-import {PolygonProps} from '../common/types'
+import {BezierCurveProps} from '../common/types'
 import {AMapContext} from '../contexts/AMapContext'
 import {useAMapListener, useMemoizedOptions} from '../hooks'
 
-const Polygon = ({
+const BezierCurve = ({
   id,
   opts = {},
   onChange,
@@ -20,41 +20,37 @@ const Polygon = ({
   onTouchEnd,
   onTouchMove,
   onTouchStart,
-}: PolygonProps) => {
+}: BezierCurveProps) => {
   const {state, dispatch} = useContext(AMapContext)
   const [prevOpts, setPrevOpts] = useState('')
-  const [polygon, setPolygon] = useState<AMap.Polygon | undefined>(undefined)
-  const [polygonId] = useState(id ? id : `polygon-${uuid()}`)
+  const [bezierCurve, setBezierCurve] = useState<AMap.BezierCurve | undefined>(
+    undefined,
+  )
+  const [bezierCurveId] = useState(id ? id : `bezierCurve-${uuid()}`)
 
-  const addPolygon = (polygon: AMap.Polygon) =>
-    dispatch({type: 'add_object', object: polygon, id: polygonId})
-  const removePolygon = () => dispatch({type: 'remove_object', id: polygonId})
+  const addBezierCurve = (bezierCurve: AMap.BezierCurve) =>
+    dispatch({type: 'add_object', object: bezierCurve, id: bezierCurveId})
+  const removeBezierCurve = () =>
+    dispatch({type: 'remove_object', id: bezierCurveId})
 
   useEffect(() => {
     if (state.map === undefined) return
-    const polygon = new AMap.Polygon({
+    const bezierCurve = new AMap.BezierCurve({
       ...opts,
       map: state.map,
-      path: opts.path
-        ? opts.path.map(point => new AMap.LngLat(point.lng, point.lat))
-        : opts.path2D
-        ? opts.path2D.map(path =>
-            path.map(point => new AMap.LngLat(point.lng, point.lat)),
-          )
-        : undefined,
     })
-    setPolygon(polygon)
+    setBezierCurve(bezierCurve)
     setPrevOpts(JSON.stringify(opts))
 
-    // Add the polygon to state.objects
-    addPolygon(polygon)
+    // Add the bezierCurve to state.objects
+    addBezierCurve(bezierCurve)
 
-    // Remove the polygon when the component is unmounted
-    return () => removePolygon()
+    // Remove the bezierCurve when the component is unmounted
+    return () => removeBezierCurve()
   }, [state.map])
 
   // Register AMap event listeners
-  useAMapListener(polygon, [
+  useAMapListener(bezierCurve, [
     {name: 'change', handler: onChange},
     {name: 'click', handler: onClick},
     {name: 'dblclick', handler: onDoubleClick},
@@ -70,12 +66,12 @@ const Polygon = ({
     {name: 'touchstart', handler: onTouchStart},
   ])
 
-  // Modify the AMap.Polygon object when component props change
-  useMemoizedOptions(polygon, opts, prevOpts, setPrevOpts)
+  // Modify the AMap.BezierCurve object when component props change
+  useMemoizedOptions(bezierCurve, opts, prevOpts, setPrevOpts, 'bezier-curve')
 
   return null
 }
 
-Polygon.displayName = 'Polygon'
+BezierCurve.displayName = 'BezierCurve'
 
-export default Polygon
+export default BezierCurve

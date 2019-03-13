@@ -23,6 +23,27 @@ export interface AMapProviderProps {
   children: React.ReactNode
 }
 
+export interface BasicShapeProps {
+  id?: string
+  onChange?: () => void
+  onClick?: (event: AMap.MapsEvent) => void
+  onDoubleClick?: (event: AMap.MapsEvent) => void
+  onHide?: (type: string, target: Object) => void
+  onMouseDown?: (event: AMap.MapsEvent) => void
+  onMouseOver?: (event: AMap.MapsEvent) => void
+  onMouseOut?: (event: AMap.MapsEvent) => void
+  onMouseUp?: (event: AMap.MapsEvent) => void
+  onRightClick?: (event: AMap.MapsEvent) => void
+  onShow?: (type: string, target: Object) => void
+  onTouchEnd?: (event: AMap.MapsEvent) => void
+  onTouchMove?: (event: AMap.MapsEvent) => void
+  onTouchStart?: (event: AMap.MapsEvent) => void
+}
+
+export interface BezierCurveProps extends BasicShapeProps {
+  opts?: AMap.BezierCurveOptions
+}
+
 export interface InfoWindowOptions extends AMap.InfoWindowOptions {
   position?: AMap.LngLatLiteral
 }
@@ -108,45 +129,17 @@ export interface MarkerProps {
 
 export interface PolygonOptions extends AMap.PolygonOptions {
   path?: AMap.LngLatLiteral[]
-  pathWithHole?: AMap.LngLatLiteral[][]
+  path2D?: AMap.LngLatLiteral[][]
 }
 
-export interface PolygonProps {
-  id?: string
+export interface PolygonProps extends BasicShapeProps {
   opts?: PolygonOptions
-  onChange?: () => void
-  onClick?: (event: AMap.MapsEvent) => void
-  onDoubleClick?: (event: AMap.MapsEvent) => void
-  onHide?: (type: string, target: Object) => void
-  onMouseDown?: (event: AMap.MapsEvent) => void
-  onMouseOver?: (event: AMap.MapsEvent) => void
-  onMouseOut?: (event: AMap.MapsEvent) => void
-  onMouseUp?: (event: AMap.MapsEvent) => void
-  onRightClick?: (event: AMap.MapsEvent) => void
-  onShow?: (type: string, target: Object) => void
-  onTouchEnd?: (event: AMap.MapsEvent) => void
-  onTouchMove?: (event: AMap.MapsEvent) => void
-  onTouchStart?: (event: AMap.MapsEvent) => void
 }
 
 export interface PolylineOptions extends AMap.PolylineOptions {
   path?: AMap.LngLatLiteral[]
 }
 
-export interface PolylineProps {
-  id?: string
+export interface PolylineProps extends BasicShapeProps {
   opts?: PolylineOptions
-  onChange?: () => void
-  onClick?: (event: AMap.MapsEvent) => void
-  onDoubleClick?: (event: AMap.MapsEvent) => void
-  onHide?: (type: string, target: Object) => void
-  onMouseDown?: (event: AMap.MapsEvent) => void
-  onMouseOver?: (event: AMap.MapsEvent) => void
-  onMouseOut?: (event: AMap.MapsEvent) => void
-  onMouseUp?: (event: AMap.MapsEvent) => void
-  onRightClick?: (event: AMap.MapsEvent) => void
-  onShow?: (type: string, target: Object) => void
-  onTouchEnd?: (event: AMap.MapsEvent) => void
-  onTouchMove?: (event: AMap.MapsEvent) => void
-  onTouchStart?: (event: AMap.MapsEvent) => void
 }

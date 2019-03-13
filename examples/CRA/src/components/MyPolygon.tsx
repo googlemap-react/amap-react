@@ -5,7 +5,7 @@ const MyPolygon = ({count}: {count: number}) => (
   <Polygon
     opts={{
       fillColor: 'blue',
-      pathWithHole: [
+      path2D: [
         [
           {lng: 116.4, lat: 39.9},
           {lng: 116.5, lat: 39.9},

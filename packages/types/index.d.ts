@@ -19,6 +19,50 @@ declare namespace AMap {
     contains(point: LngLat | Pixel): boolean
   }
 
+  export class BasicShape extends MVCObject {
+    constructor(opts: BasicShapeOptions) {}
+    getBounds(): Bounds
+    getExtData(): any
+    getOptions(): BasicShapeOptions
+    hide(): void
+    setExtData(extData: any): void
+    setOptions(opts: BasicShapeOptions): void
+    show(): void
+  }
+
+  export interface BasicShapeOptions {
+    bubble?: boolean
+    cursor?: string
+    draggable?: boolean
+    extData?: any
+    fillColor?: string
+    fillOpacity?: number
+    map?: Map
+    strokeColor?: string
+    strokeDasharray?: number[]
+    strokeOpacity?: number
+    strokeStyle?: 'solid' | 'dashed'
+    strokeWeight?: number
+    zIndex?: number
+  }
+
+  export class BezierCurve extends BasicShape {
+    constructor(opts: BezierCurveOptions) {}
+    getLength(): number
+    getOptions(): BezierCurveOptions
+    getPath(): number[][] | number[][][]
+    setOptions(opts: BezierCurveOptions): void
+    setPath(path: number[][] | number[][][]): void
+  }
+
+  export interface BezierCurveOptions extends BasicShapeOptions {
+    borderWeight?: number
+    isOutline?: boolean
+    outlineColor?: string
+    path?: number[][] | number[][][]
+    showDir?: boolean
+  }
+
   export class Bounds {
     constructor(southWest: LngLat, northEast: LngLat)
     contains(point: LngLat): boolean
@@ -392,72 +436,38 @@ declare namespace AMap {
     y: number
   }
 
-  export class Polygon extends MVCObject {
+  export class Polygon extends BasicShape {
     constructor(opts: PolygonOptions)
     contains(point: LngLat): boolean
     getArea(): number
-    getBounds(): Bounds
-    getExtData(): any
     getOptions(): PolygonOptions
-    hide(): any
-    setExtData(extData: any): void
+    getPath(): LngLat[] | LngLat[][]
     setOptions(opts: PolygonOptions): void
     setPath(path: LngLat[] | LngLat[][]): void
-    show(): any
   }
 
-  export interface PolygonOptions {
-    bubble?: boolean
-    cursor?: string
-    draggable?: boolean
-    extData?: any
-    fillColor?: string
-    fillOpacity?: number
-    map?: Map
+  export interface PolygonOptions extends BasicShapeOptions {
     path?: LngLat[] | LngLatLiteral[] | LngLat[][]
-    strokeColor?: string
-    strokeDasharray?: number[]
-    strokeOpacity?: number
-    strokeStyle?: 'solid' | 'dashed'
-    strokeWeight?: number
-    zIndex?: number
   }
 
-  export class Polyline extends MVCObject {
+  export class Polyline extends BasicShape {
     constructor(opts: PolylineOptions)
-    contains(point: LngLat): boolean
-    getBounds(): Bounds
-    getExtData(): any
     getLength(): number
     getOptions(): PolylineOptions
-    hide(): any
-    setExtData(extData: any): void
+    getPath(): LngLat[]
     setOptions(opts: PolylineOptions): void
     setPath(path: LngLat[]): void
-    show(): any
   }
 
-  export interface PolylineOptions {
-    bubble?: boolean
-    cursor?: string
-    draggable?: boolean
-    extData?: any
-    fillColor?: string
-    fillOpacity?: number
+  export interface PolylineOptions extends BasicShapeOptions {
+    borderWeight?: number
     geodesic?: boolean
     isOutline?: boolean
     lineCap?: 'butt' | 'round' | 'square'
     lineJoin?: 'miter' | 'round' | 'bevel'
-    map?: Map
     outlineColor?: string
     path?: LngLat[] | LngLatLiteral[]
     showDir?: boolean
-    strokeColor?: string
-    strokeDasharray?: number[]
-    strokeOpacity?: number
-    strokeStyle?: 'solid' | 'dashed'
-    strokeWeight?: number
-    zIndex?: number
   }
 
   export interface Shop {

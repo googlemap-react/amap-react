@@ -1,10 +1,11 @@
 import {useEffect} from 'react'
 
 const useMemoizedOptions = (
-  instance: AMap.Polygon | AMap.Polyline | undefined,
+  instance: AMap.BasicShape | undefined,
   opts: any,
   prevOpts: string,
   setPrevOpts: React.Dispatch<React.SetStateAction<string>>,
+  type?: string,
 ) => {
   useEffect(() => {
     if (
@@ -16,12 +17,14 @@ const useMemoizedOptions = (
     instance.setOptions({
       ...opts,
       path: opts.path
-        ? opts.path.map(
-            (point: AMap.LngLatLiteral) =>
-              new AMap.LngLat(point.lng, point.lat),
-          )
-        : opts.pathWithHole
-        ? opts.pathWithHole.map((path: AMap.LngLatLiteral[]) =>
+        ? type === 'bezier-curve'
+          ? opts.path
+          : opts.path.map(
+              (point: AMap.LngLatLiteral) =>
+                new AMap.LngLat(point.lng, point.lat),
+            )
+        : opts.path2D
+        ? opts.path2D.map((path: AMap.LngLatLiteral[]) =>
             path.map(
               (point: AMap.LngLatLiteral) =>
                 new AMap.LngLat(point.lng, point.lat),
