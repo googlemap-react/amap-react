@@ -51,7 +51,11 @@ describe('Marker', () => {
           <Marker
             id="my-marker"
             opts={{
-              icon: '',
+              icon: {
+                image: 'https://placehold.it/350x150',
+                imageOffset: {x: 0, y: 0},
+                size: {width: 350, height: 150},
+              },
               label: {content: 'test-label'},
               position: {lat: 39, lng: 116},
               title: 'test-title',

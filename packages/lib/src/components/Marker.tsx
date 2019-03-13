@@ -52,7 +52,22 @@ const Marker = ({
       icon: opts.icon
         ? typeof opts.icon === 'string'
           ? opts.icon
-          : new AMap.Icon(opts.icon)
+          : new AMap.Icon({
+              image: opts.icon.image,
+              imageOffset: opts.icon.imageOffset
+                ? new AMap.Pixel(
+                    opts.icon.imageOffset.x,
+                    opts.icon.imageOffset.y,
+                  )
+                : new AMap.Pixel(0, 0),
+              imageSize: opts.icon.imageSize
+                ? new AMap.Size(
+                    opts.icon.imageSize.width,
+                    opts.icon.imageSize.height,
+                  )
+                : new AMap.Size(opts.icon.size.width, opts.icon.size.height),
+              size: new AMap.Size(opts.icon.size.width, opts.icon.size.height),
+            })
         : undefined,
       position: opts.position
         ? new AMap.LngLat(
@@ -113,7 +128,24 @@ const Marker = ({
     opts.extData && marker.setExtData(opts.extData)
     opts.icon &&
       marker.setIcon(
-        typeof opts.icon === 'string' ? opts.icon : new AMap.Icon(opts.icon),
+        typeof opts.icon === 'string'
+          ? opts.icon
+          : new AMap.Icon({
+              image: opts.icon.image,
+              imageOffset: opts.icon.imageOffset
+                ? new AMap.Pixel(
+                    opts.icon.imageOffset.x,
+                    opts.icon.imageOffset.y,
+                  )
+                : new AMap.Pixel(0, 0),
+              imageSize: opts.icon.imageSize
+                ? new AMap.Size(
+                    opts.icon.imageSize.width,
+                    opts.icon.imageSize.height,
+                  )
+                : new AMap.Size(opts.icon.size.width, opts.icon.size.height),
+              size: new AMap.Size(opts.icon.size.width, opts.icon.size.height),
+            }),
       )
     opts.label && marker.setLabel(opts.label)
     opts.offset && marker.setOffset(opts.offset)

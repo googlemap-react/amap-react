@@ -20,7 +20,6 @@ declare namespace AMap {
   }
 
   export class BasicShape extends MVCObject {
-    constructor(opts: BasicShapeOptions) {}
     getBounds(): Bounds
     getExtData(): any
     getMap(): Map | null
@@ -51,7 +50,7 @@ declare namespace AMap {
   }
 
   export class BezierCurve extends BasicShape {
-    constructor(opts: BezierCurveOptions) {}
+    constructor(opts: BezierCurveOptions)
     getLength(): number
     getOptions(): BezierCurveOptions
     getPath(): number[][] | number[][][]
@@ -127,7 +126,12 @@ declare namespace AMap {
     setImageSize(size: Size): void
   }
 
-  export interface IconLiteral extends IconOptions {}
+  export interface IconLiteral {
+    image: string
+    imageOffset?: PixelLiteral
+    imageSize?: SizeLiteral
+    size: SizeLiteral
+  }
 
   export interface IconOptions {
     image: string
@@ -510,9 +514,14 @@ declare namespace AMap {
 
   export class Size {
     constructor(width: number, height: number)
-    getWidth(): number
     getHeight(): number
+    getWidth(): number
     toString(): string
+  }
+
+  export interface SizeLiteral {
+    height: number
+    width: number
   }
 
   export interface Status {

@@ -15,6 +15,10 @@ class Bounds {
   constructor(southWest: number, northEast: number) {}
 }
 
+class Icon {
+  constructor(opts: AMap.IconOptions) {}
+}
+
 class InfoWindow {
   content?: string | HTMLElement
   opts: AMap.InfoWindowOptions
@@ -75,6 +79,7 @@ class Map {
 }
 
 class Marker {
+  icon?: string | AMap.Icon
   label?: AMap.MarkerLabel
   opts: AMap.MarkerOptions
   position?: AMap.LngLat
@@ -82,6 +87,9 @@ class Marker {
   zIndex?: number
   getPosition = () => this.position
   hide = () => {}
+  setIcon = (icon: string | AMap.Icon) => {
+    this.icon = icon
+  }
   setLabel = (label: AMap.MarkerLabel) => {
     this.label = label
   }
@@ -136,6 +144,7 @@ const defineGlobalVariable = () => {
         addListener: () => {},
         removeListener: () => {},
       },
+      Icon: Icon,
       InfoWindow: InfoWindow,
       LngLat: LngLat,
       Map: Map,
