@@ -1,6 +1,6 @@
 import React from 'react'
 import Pentagram from './components/Pentagram'
-import {AMapProvider, InfoWindow, MapBox, Marker} from './lib'
+import {AMapProvider, InfoWindow, MapBox, Marker, Polygon} from './lib'
 
 const App = () => {
   const [count, setCount] = React.useState(0)
@@ -14,14 +14,14 @@ const App = () => {
             width: '100%',
           }}
           onClick={() => {
-            console.log('map clicked!')
+            setCount(count => count + 1)
           }}
           opts={{
             center: {
               lng: 116.4,
               lat: 39.9,
             },
-            zoom: 17,
+            zoom: 10,
           }}
         />
         <Marker
@@ -52,6 +52,32 @@ const App = () => {
         >
           <p>Count: {count}</p>
         </InfoWindow>
+        <Polygon
+          opts={{
+            fillColor: 'blue',
+            pathWithHole: [
+              [
+                {lng: 116.4, lat: 39.9},
+                {lng: 116.5, lat: 39.9},
+                {lng: 116.5, lat: 39.8},
+                {lng: 116.4, lat: 39.8},
+              ],
+              [
+                {lng: 116.45, lat: 39.89},
+                {lng: 116.48, lat: 39.89},
+                {lng: 116.48, lat: 39.81},
+                {lng: 116.45, lat: 39.81},
+              ],
+              [
+                {lng: 116.41 + count / 100, lat: 39.89},
+                {lng: 116.42, lat: 39.89},
+                {lng: 116.42, lat: 39.81},
+                {lng: 116.41, lat: 39.81},
+              ],
+            ],
+            strokeColor: 'red',
+          }}
+        />
       </AMapProvider>
     </>
   )

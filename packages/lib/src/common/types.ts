@@ -105,3 +105,26 @@ export interface MarkerProps {
   onTouchMove?: (event: AMap.MapsEvent) => void
   onTouchStart?: (event: AMap.MapsEvent) => void
 }
+
+export interface PolygonOptions extends AMap.PolygonOptions {
+  path?: AMap.LngLatLiteral[]
+  pathWithHole?: AMap.LngLatLiteral[][]
+}
+
+export interface PolygonProps {
+  id?: string
+  opts?: PolygonOptions
+  onChange?: () => void
+  onClick?: (event: AMap.MapsEvent) => void
+  onDoubleClick?: (event: AMap.MapsEvent) => void
+  onHide?: (type: string, target: Object) => void
+  onMouseDown?: (event: AMap.MapsEvent) => void
+  onMouseOver?: (event: AMap.MapsEvent) => void
+  onMouseOut?: (event: AMap.MapsEvent) => void
+  onMouseUp?: (event: AMap.MapsEvent) => void
+  onRightClick?: (event: AMap.MapsEvent) => void
+  onShow?: (type: string, target: Object) => void
+  onTouchEnd?: (event: AMap.MapsEvent) => void
+  onTouchMove?: (event: AMap.MapsEvent) => void
+  onTouchStart?: (event: AMap.MapsEvent) => void
+}

@@ -375,7 +375,9 @@ declare namespace AMap {
     on(eventName: string, handler: Function, context?: Object): void
   }
 
-  export declare type OverlayType = 'circle' | 'marker' | 'polyline' | 'polygon'
+  export type Overlay = TileLayer | Marker
+
+  export type OverlayType = 'circle' | 'marker' | 'polyline' | 'polygon'
 
   export class Pixel {
     constructor(x: number, y: number)
@@ -390,9 +392,40 @@ declare namespace AMap {
     y: number
   }
 
-  export declare type PolygonLiteral = LngLatLiteral[]
+  export class Polygon extends MVCObject {
+    constructor(opts: PolygonOptions)
+    contains(point: LngLat): boolean
+    getArea(): number
+    getBounds(): Bounds
+    getExtData(): any
+    getOptions(): PolygonOptions
+    hide(): any
+    setExtData(extData: any): void
+    setOptions(opts: PolygonOptions): void
+    setPath(path: PolygonLiteral | PolygonWithHoleLiteral): void
+    show(): any
+  }
 
-  export declare type PolygonWithHoleLiteral = PolygonLiteral[]
+  export type PolygonLiteral = LngLatLiteral[]
+
+  export interface PolygonOptions {
+    bubble?: boolean
+    cursor?: string
+    draggable?: boolean
+    extData?: any
+    fillColor?: string
+    fillOpacity?: number
+    map?: Map
+    path?: LngLat[] | LngLatLiteral[] | LngLat[][]
+    strokeColor?: string
+    strokeDasharray?: number[]
+    strokeOpacity?: number
+    strokeStyle?: 'solid' | 'dashed'
+    strokeWeight?: number
+    zIndex?: number
+  }
+
+  export type PolygonWithHoleLiteral = PolygonLiteral[]
 
   export interface Shop {
     building_id: string
@@ -501,5 +534,5 @@ declare namespace AMap {
     zoom?: number
   }
 
-  export declare type ViewMode = '2D' | '3D'
+  export type ViewMode = '2D' | '3D'
 }

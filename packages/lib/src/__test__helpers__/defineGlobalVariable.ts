@@ -68,6 +68,16 @@ class Pixel {
   constructor(x: number, y: number) {}
 }
 
+class Polygon {
+  opts: AMap.PolygonOptions
+  setOptions = (opts: AMap.PolygonOptions) => {
+    this.opts = opts
+  }
+  constructor(opts: AMap.PolygonOptions) {
+    this.opts = opts
+  }
+}
+
 class Size {
   constructor(width: number, height: number) {}
 }
@@ -85,6 +95,7 @@ const defineGlobalVariable = () => {
       Map: Map,
       Marker: Marker,
       Pixel: Pixel,
+      Polygon: Polygon,
       Size: Size,
     },
     writable: true,

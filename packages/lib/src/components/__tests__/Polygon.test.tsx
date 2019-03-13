@@ -3,34 +3,42 @@ import {act} from 'react-dom/test-utils'
 import 'jest-dom/extend-expect'
 import 'react-testing-library/cleanup-after-each'
 import {render, wait, cleanup} from 'react-testing-library'
-import {AMapProvider, MapBox, Marker} from '../../..'
+import {AMapProvider, MapBox, Polygon} from '../../..'
 import {defineGlobalVariable} from '../../__test__helpers__'
 
 defineGlobalVariable()
 
-describe('Marker', () => {
+const PATH_WITH_HOLE: AMap.LngLatLiteral[][] = [
+  [
+    {lng: 116.4, lat: 39.9},
+    {lng: 116.5, lat: 39.9},
+    {lng: 116.5, lat: 39.8},
+    {lng: 116.4, lat: 39.8},
+  ],
+  [
+    {lng: 116.45, lat: 39.89},
+    {lng: 116.48, lat: 39.89},
+    {lng: 116.48, lat: 39.81},
+    {lng: 116.45, lat: 39.81},
+  ],
+  [
+    {lng: 116.41, lat: 39.89},
+    {lng: 116.42, lat: 39.89},
+    {lng: 116.42, lat: 39.81},
+    {lng: 116.41, lat: 39.81},
+  ],
+]
+
+describe('Polygon', () => {
   afterEach(() => {
     cleanup()
   })
 
   it('can be rendered', async () => {
-    const {container} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
-        <Marker />
-      </AMapProvider>,
-    )
-    expect(container.innerHTML).toMatch('Loading...')
-    await wait(() => {
-      expect(container.innerHTML).not.toMatch('Loading...')
-    })
-  })
-
-  it('updates options after rerender', async () => {
     const {container, rerender} = render(
       <AMapProvider>
         <MapBox apiKey="FAKE_KEY" />
-        <Marker opts={{position: {lat: 39, lng: 116}}} />
+        <Polygon />
       </AMapProvider>,
     )
     await wait(() => {
@@ -40,14 +48,25 @@ describe('Marker', () => {
       rerender(
         <AMapProvider>
           <MapBox apiKey="FAKE_KEY" />
-          <Marker
-            id="my-marker"
+          <Polygon
             opts={{
-              icon: '',
-              label: {content: 'test-label'},
-              position: {lat: 39, lng: 116},
-              title: 'test-title',
-              zIndex: 10,
+              path: [
+                {lng: 31, lat: 18},
+                {lng: 36, lat: 19},
+                {lng: 39, lat: 20},
+              ],
+            }}
+          />
+        </AMapProvider>,
+      ),
+    )
+    act(() =>
+      rerender(
+        <AMapProvider>
+          <MapBox apiKey="FAKE_KEY" />
+          <Polygon
+            opts={{
+              pathWithHole: PATH_WITH_HOLE,
             }}
           />
         </AMapProvider>,
@@ -60,8 +79,8 @@ describe('Marker', () => {
       const {container} = render(
         <AMapProvider>
           <MapBox apiKey="FAKE_KEY" />
-          <Marker id="marker" />
-          <Marker id="marker" />
+          <Polygon id="polygon" />
+          <Polygon id="polygon" />
         </AMapProvider>,
       )
       await wait(() => {
@@ -70,17 +89,5 @@ describe('Marker', () => {
     }
 
     expect(check()).rejects.toEqual(new Error('The id has already been taken'))
-  })
-
-  it.concurrent('can have children', async () => {
-    const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
-        <Marker>I am children</Marker>
-      </AMapProvider>,
-    )
-    await wait(() => {
-      expect(container.innerHTML).not.toMatch('Loading...')
-    })
   })
 })
