@@ -3,12 +3,12 @@ import {act} from 'react-dom/test-utils'
 import 'jest-dom/extend-expect'
 import 'react-testing-library/cleanup-after-each'
 import {render, wait, cleanup} from 'react-testing-library'
-import {AMapProvider, MapBox, Polyline} from '../../../'
+import {AMapProvider, MapBox, BezierCurve} from '../../../'
 import {defineGlobalVariable} from '../../__test__helpers__'
 
 defineGlobalVariable()
 
-describe('Polyline', () => {
+describe('BezierCurve', () => {
   afterEach(() => {
     cleanup()
   })
@@ -17,11 +17,7 @@ describe('Polyline', () => {
     const {container, rerender} = render(
       <AMapProvider>
         <MapBox apiKey="FAKE_KEY" />
-        <Polyline
-          opts={{
-            path: [{lng: 30, lat: 19}, {lng: 36, lat: 19}, {lng: 39, lat: 20}],
-          }}
-        />
+        <BezierCurve />
       </AMapProvider>,
     )
     await wait(() => {
@@ -31,13 +27,9 @@ describe('Polyline', () => {
       rerender(
         <AMapProvider>
           <MapBox apiKey="FAKE_KEY" />
-          <Polyline
+          <BezierCurve
             opts={{
-              path: [
-                {lng: 31, lat: 19},
-                {lng: 36, lat: 19},
-                {lng: 39, lat: 20},
-              ],
+              path: [[[116, 4, 39.9]], [[0, 0], [36.2, 39.7]]],
             }}
           />
         </AMapProvider>,
@@ -50,8 +42,8 @@ describe('Polyline', () => {
       const {container} = render(
         <AMapProvider>
           <MapBox apiKey="FAKE_KEY" />
-          <Polyline id="polyline" />
-          <Polyline id="polyline" />
+          <BezierCurve id="bezierCurve" />
+          <BezierCurve id="bezierCurve" />
         </AMapProvider>,
       )
       await wait(() => {

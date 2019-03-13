@@ -38,7 +38,11 @@ describe('Polygon', () => {
     const {container, rerender} = render(
       <AMapProvider>
         <MapBox apiKey="FAKE_KEY" />
-        <Polygon />
+        <Polygon
+          opts={{
+            path2D: PATH_2D,
+          }}
+        />
       </AMapProvider>,
     )
     await wait(() => {

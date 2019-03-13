@@ -1,7 +1,7 @@
 import React from 'react'
 import {Polygon} from '../lib'
 
-const MyPolygon = ({count}: {count: number}) => (
+const MyPolygon = ({count, visible}: {count: number; visible: boolean}) => (
   <Polygon
     opts={{
       fillColor: 'blue',
@@ -26,6 +26,7 @@ const MyPolygon = ({count}: {count: number}) => (
         ],
       ],
       strokeColor: 'red',
+      visible: visible,
     }}
   />
 )

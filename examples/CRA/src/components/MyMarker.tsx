@@ -5,9 +5,10 @@ import {InfoWindow, Marker} from '../lib'
 interface MyMarkerProps {
   count: number
   setCount: React.Dispatch<React.SetStateAction<number>>
+  visible: boolean
 }
 
-const MyMarker = ({count, setCount}: MyMarkerProps) => (
+const MyMarker = ({count, setCount, visible}: MyMarkerProps) => (
   <>
     <Marker
       id="marker"
@@ -17,6 +18,7 @@ const MyMarker = ({count, setCount}: MyMarkerProps) => (
           lng: 116.4,
           lat: 39.9,
         },
+        visible: visible,
       }}
       onClick={() => {
         setCount(count => count + 1)
@@ -24,19 +26,21 @@ const MyMarker = ({count, setCount}: MyMarkerProps) => (
     >
       <Pentagram size={2} />
     </Marker>
-    <InfoWindow
-      anchorId="marker"
-      visible={count % 2 === 0}
-      opts={{
-        anchor: 'top-center',
-        offset: {
-          x: 10,
-          y: 10,
-        },
-      }}
-    >
-      <p>Count: {count}</p>
-    </InfoWindow>
+    {visible ? (
+      <InfoWindow
+        anchorId="marker"
+        visible={count % 2 === 0}
+        opts={{
+          anchor: 'top-center',
+          offset: {
+            x: 10,
+            y: 10,
+          },
+        }}
+      >
+        <p>Count: {count}</p>
+      </InfoWindow>
+    ) : null}
   </>
 )
 

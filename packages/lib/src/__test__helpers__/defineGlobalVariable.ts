@@ -1,6 +1,16 @@
 import {EventEmitter} from 'events'
 import {removeListener} from 'cluster'
 
+class BezierCurve {
+  opts: AMap.BezierCurveOptions
+  setOptions = (opts: AMap.BezierCurveOptions) => {
+    this.opts = opts
+  }
+  constructor(opts: AMap.BezierCurveOptions) {
+    this.opts = opts
+  }
+}
+
 class Bounds {
   constructor(southWest: number, northEast: number) {}
 }
@@ -28,12 +38,36 @@ class LngLat {
 
 class Map {
   center?: AMap.LngLat
+  features?: AMap.Feature[]
+  labelzIndex?: number
+  lang?: string
   opts: AMap.MapOptions
+  pitch?: number
+  rotation?: number
+  zoom?: number
   clearMap = () => {}
   destroy = () => {}
   getCenter = () => this.center
   setCenter = (center: AMap.LngLat) => {
     this.center = center
+  }
+  setFeatures = (features: AMap.Feature[]) => {
+    this.features = features
+  }
+  setLabelzIndex = (labelzIndex: number) => {
+    this.labelzIndex = labelzIndex
+  }
+  setLang = (lang: string) => {
+    this.lang = lang
+  }
+  setPitch = (pitch: number) => {
+    this.pitch = pitch
+  }
+  setRotation = (rotation: number) => {
+    this.rotation = rotation
+  }
+  setZoom = (zoom: number) => {
+    this.zoom = zoom
   }
   constructor(mapDiv: HTMLElement, opts: AMap.MapOptions) {
     this.opts = opts
@@ -47,6 +81,7 @@ class Marker {
   title?: string
   zIndex?: number
   getPosition = () => this.position
+  hide = () => {}
   setLabel = (label: AMap.MarkerLabel) => {
     this.label = label
   }
@@ -59,6 +94,7 @@ class Marker {
   setzIndex = (zIndex: number) => {
     this.zIndex = zIndex
   }
+  show = () => {}
   constructor(opts: AMap.MarkerOptions) {
     this.opts = opts
   }
@@ -94,6 +130,7 @@ class Size {
 const defineGlobalVariable = () => {
   Object.defineProperty(global, 'AMap', {
     value: {
+      BezierCurve: BezierCurve,
       Bounds: Bounds,
       event: {
         addListener: () => {},

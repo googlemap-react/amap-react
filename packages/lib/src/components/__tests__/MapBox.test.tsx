@@ -47,27 +47,21 @@ describe('MapBox', () => {
     act(() =>
       rerender(
         <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" opts={{center: {lat: 39, lng: 116}}} />
+          <MapBox
+            apiKey="FAKE_KEY"
+            opts={{
+              center: {lat: 39, lng: 116},
+              features: (['bd'] as unknown) as AMap.Feature[],
+              labelzIndex: 120,
+              lang: 'en',
+              mapStyle: '',
+              pitch: 15,
+              rotation: 15,
+              zoom: 10,
+            }}
+          />
         </AMapProvider>,
       ),
     )
-  })
-
-  it('registers event listeners properly', async () => {
-    const {container} = render(
-      <AMapProvider>
-        <MapBox
-          apiKey="FAKE_KEY"
-          onClick={() => {
-            console.log('clicked')
-          }}
-        />
-      </AMapProvider>,
-    )
-    expect(container.innerHTML).toMatch('Loading...')
-    await wait(() => {
-      expect(container.innerHTML).not.toMatch('Loading...')
-    })
-    expect(loadjs.reset).not.toHaveBeenCalled()
   })
 })

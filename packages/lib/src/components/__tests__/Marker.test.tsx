@@ -40,6 +40,14 @@ describe('Marker', () => {
       rerender(
         <AMapProvider>
           <MapBox apiKey="FAKE_KEY" />
+          <Marker opts={{position: {lat: 39, lng: 116}, visible: false}} />
+        </AMapProvider>,
+      ),
+    )
+    act(() =>
+      rerender(
+        <AMapProvider>
+          <MapBox apiKey="FAKE_KEY" />
           <Marker
             id="my-marker"
             opts={{
@@ -47,6 +55,7 @@ describe('Marker', () => {
               label: {content: 'test-label'},
               position: {lat: 39, lng: 116},
               title: 'test-title',
+              visible: true,
               zIndex: 10,
             }}
           />

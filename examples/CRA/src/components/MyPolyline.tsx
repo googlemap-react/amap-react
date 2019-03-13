@@ -1,7 +1,7 @@
 import React from 'react'
 import {Polyline} from '../lib'
 
-const MyPolyline = () => (
+const MyPolyline = ({visible}: {visible: boolean}) => (
   <Polyline
     opts={{
       path: [
@@ -10,6 +10,7 @@ const MyPolyline = () => (
         {lng: 116.5, lat: 39.8},
         {lng: 116.4, lat: 39.8},
       ],
+      visible: visible,
     }}
   />
 )

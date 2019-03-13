@@ -8,13 +8,12 @@ import {AMapProvider} from './lib'
 
 const App = () => {
   const [count, setCount] = React.useState(0)
-  const [zoom, setZoom] = React.useState(10)
-  const [overlay, setOverlay] = React.useState('marker')
+  const [overlay, setOverlay] = React.useState('bezier')
   return (
     <>
       <AMapProvider>
         <select
-          defaultValue="marker"
+          defaultValue="bezier"
           onChange={event => setOverlay(event.target.value)}
         >
           <option value="bezier">Bezier Curve</option>
@@ -22,15 +21,15 @@ const App = () => {
           <option value="polygon">Polygon with holes</option>
           <option value="polyline">Polyline</option>
         </select>
-        <MyMapBox zoom={zoom} />
-        {
-          ({
-            bezier: <MyBezier setZoom={setZoom} />,
-            marker: <MyMarker count={count} setCount={setCount} />,
-            polygon: <MyPolygon count={count} />,
-            polyline: <MyPolyline />,
-          } as any)[overlay]
-        }
+        <MyMapBox />
+        <MyBezier visible={overlay === 'bezier'} />
+        <MyMarker
+          count={count}
+          setCount={setCount}
+          visible={overlay === 'marker'}
+        />
+        <MyPolygon count={count} visible={overlay === 'polygon'} />
+        <MyPolyline visible={overlay === 'polyline'} />
       </AMapProvider>
     </>
   )

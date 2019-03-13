@@ -23,15 +23,18 @@ declare namespace AMap {
     constructor(opts: BasicShapeOptions) {}
     getBounds(): Bounds
     getExtData(): any
+    getMap(): Map | null
     getOptions(): BasicShapeOptions
     hide(): void
     setExtData(extData: any): void
+    setMap(map: Map | null): void
     setOptions(opts: BasicShapeOptions): void
     show(): void
   }
 
   export interface BasicShapeOptions {
     bubble?: boolean
+    clickable?: boolean
     cursor?: string
     draggable?: boolean
     extData?: any
@@ -43,6 +46,7 @@ declare namespace AMap {
     strokeOpacity?: number
     strokeStyle?: 'solid' | 'dashed'
     strokeWeight?: number
+    visible?: boolean
     zIndex?: number
   }
 
@@ -57,6 +61,7 @@ declare namespace AMap {
 
   export interface BezierCurveOptions extends BasicShapeOptions {
     borderWeight?: number
+    geodesic?: boolean
     isOutline?: boolean
     outlineColor?: string
     path?: number[][] | number[][][]
@@ -139,7 +144,7 @@ declare namespace AMap {
     hide(): void
     hideFloorBar(): void
     hideLabels(): void
-    setMap(map: Map): void
+    setMap(map: Map | null): void
     setOpacity(opacity: number): void
     setzIndex(zIndex: number): void
     show(): void
@@ -360,7 +365,7 @@ declare namespace AMap {
     setExtData(extData: any): void
     setIcon(icon: string | Icon): void
     setLabel(label: MarkerLabel): void
-    setMap(map: Map): void
+    setMap(map: Map | null): void
     setOffset(offset: Pixel | PixelLiteral): void
     setPosition(position: LngLat): void
     setRaiseOnDrag(raiseOnDrag: boolean): void
@@ -531,7 +536,7 @@ declare namespace AMap {
     getZooms(): number[]
     hide(): void
     reload(): void
-    setMap(map: Map): void
+    setMap(map: Map | null): void
     setTileUrl(tileUrl: string): void
     setzIndex(zIndex: number): void
     show(): void

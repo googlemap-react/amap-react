@@ -129,6 +129,8 @@ const Marker = ({
     opts.shadow && marker.setShadow(opts.shadow)
     opts.shape && marker.setShape(opts.shape)
     opts.title && marker.setTitle(opts.title)
+    if (opts.visible === undefined || opts.visible) marker.show()
+    else marker.hide()
     opts.zIndex && marker.setzIndex(opts.zIndex)
     setPrevOpts(JSON.stringify(opts))
   }, [opts])
