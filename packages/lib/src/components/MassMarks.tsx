@@ -32,29 +32,38 @@ const MassMarks = ({
 
   useEffect(() => {
     if (state.map === undefined) return
-    const massMarks = new AMap.MassMarks(data, {
-      ...opts,
-      style: opts.style
-        ? Array.isArray(opts.style)
-          ? opts.style.map(style => ({
-              ...style,
-              anchor: new AMap.Pixel(style.anchor.x, style.anchor.y),
-              size: new AMap.Size(style.size.width, style.size.height),
-            }))
+    const massMarks = new AMap.MassMarks(
+      data.map(point => ({
+        ...point,
+        lnglat: [point.lng, point.lat],
+      })),
+      {
+        ...opts,
+        style: opts.style
+          ? Array.isArray(opts.style)
+            ? opts.style.map(style => ({
+                ...style,
+                anchor: new AMap.Pixel(style.anchor.x, style.anchor.y),
+                size: new AMap.Size(style.size.width, style.size.height),
+              }))
+            : {
+                ...opts.style,
+                anchor: new AMap.Pixel(
+                  opts.style.anchor.x,
+                  opts.style.anchor.y,
+                ),
+                size: new AMap.Size(
+                  opts.style.size.width,
+                  opts.style.size.height,
+                ),
+              }
           : {
-              ...opts.style,
-              anchor: new AMap.Pixel(opts.style.anchor.x, opts.style.anchor.y),
-              size: new AMap.Size(
-                opts.style.size.width,
-                opts.style.size.height,
-              ),
-            }
-        : {
-            anchor: new AMap.Pixel(0, 0),
-            size: new AMap.Size(30, 30),
-            url: 'https://placehold.it/30x30',
-          },
-    })
+              anchor: new AMap.Pixel(0, 0),
+              size: new AMap.Size(30, 30),
+              url: 'https://placehold.it/30x30',
+            },
+      },
+    )
     massMarks.setMap(state.map)
     if (opts.visible === undefined || opts.visible) massMarks.show()
     else massMarks.hide()
@@ -85,7 +94,12 @@ const MassMarks = ({
   useEffect(() => {
     if (massMarks === undefined) return
     if (data !== undefined && JSON.stringify(data) !== prevData) {
-      massMarks.setData(data)
+      massMarks.setData(
+        data.map(point => ({
+          ...point,
+          lnglat: [point.lng, point.lat],
+        })),
+      )
       setPrevData(JSON.stringify(data))
     }
     if (opts !== undefined && JSON.stringify(opts) !== prevOpts) {

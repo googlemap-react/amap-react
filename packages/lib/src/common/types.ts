@@ -150,7 +150,7 @@ export interface MassMarksOptions extends AMap.MassMarksOptions {
 
 export interface MassMarksProps {
   id?: string
-  data?: Object[]
+  data?: AMap.MassMarkLiteral[]
   opts?: MassMarksOptions
   onClick?: (event: AMap.MapsEvent) => void
   onComplete?: () => void

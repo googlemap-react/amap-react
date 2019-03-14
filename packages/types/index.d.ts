@@ -456,14 +456,25 @@ declare namespace AMap {
 
   export type Mask = Array<LngLatLiteral[] | LngLatLiteral[][]>
 
+  export interface MassMarkLiteral extends LngLatLiteral {
+    style?: number
+    [propName: string]: any
+  }
+
+  export interface MassMark {
+    lnglat: number[]
+    style?: number
+    [propName: string]: any
+  }
+
   export class MassMarks extends MVCObject {
-    constructor(data: Object[], opts: MassMarksOptions)
+    constructor(data: MassMark[], opts: MassMarksOptions)
     clear(): void
-    getData(): Object[]
+    getData(): MassMark[]
     getMap(): Map
     getStyle(): StyleObjectOptions | StyleObjectOptions[]
     hide(): void
-    setData(data: Object[]): void
+    setData(data: MassMark[]): void
     setMap(map: Map): void
     setStyle(style: StyleObjectOptions | StyleObjectOptions[]): void
     show(): void

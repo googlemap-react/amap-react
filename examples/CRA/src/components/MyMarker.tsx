@@ -29,13 +29,13 @@ const MyMarker = ({count, setCount, visible}: MyMarkerProps) => (
     {visible ? (
       <InfoWindow
         anchorId="marker"
-        visible={count % 2 === 0}
         opts={{
           anchor: 'top-center',
           offset: {
             x: 10,
             y: 10,
           },
+          visible: count % 2 === 0,
         }}
       >
         <p>Count: {count}</p>
