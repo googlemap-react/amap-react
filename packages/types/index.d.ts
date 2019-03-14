@@ -153,6 +153,40 @@ declare namespace AMap {
 
   export type Feature = 'bg' | 'building' | 'point' | 'road'
 
+  export class Heatmap extends MVCObject {
+    constructor(map: Map, opts: HeatmapOptions)
+    addDataPoint(lng: number, lat: number, count: number): void
+    getDataSet(): HeatmapDataset
+    getMap(): Map
+    getOptions(): HeatmapOptions
+    hide(): void
+    setDataSet(dataset: HeatmapDataset): void
+    setMap(map: Map): void
+    setOptions(opts: HeatmapOptions): void
+    show(): void
+  }
+
+  export interface HeatmapColor {
+    [interval: number]: string
+  }
+
+  export interface HeatmapData extends LngLatLiteral {
+    count?: number
+  }
+
+  export interface HeatmapDataset {
+    max?: number
+    data: HeatmapData[] | string
+    dataParser?: (rawData: Object) => HeatmapData[]
+  }
+
+  export interface HeatmapOptions {
+    gradient?: HeatmapColor
+    opacity?: number[]
+    radius?: number
+    zooms?: number[]
+  }
+
   export class Icon extends MVCObject {
     constructor(opts: IconOptions)
     getImageSize(): Size

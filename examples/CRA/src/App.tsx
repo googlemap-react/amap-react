@@ -2,6 +2,7 @@ import React from 'react'
 import MyBezier from './components/MyBezier'
 import MyCircle from './components/MyCircle'
 import MyEllipse from './components/MyEllipse'
+import MyHeatMap from './components/MyHeatMap'
 import MyMapBox from './components/MyMapBox'
 import MyMarker from './components/MyMarker'
 import MyMassMarks from './components/MyMassMarks'
@@ -23,6 +24,7 @@ const App = () => {
           <option value="bezier">Bezier Curve</option>
           <option value="circle">Circle</option>
           <option value="ellipse">Ellipse</option>
+          <option value="heat">HeatMap</option>
           <option value="marker">Marker'n'InfoWindow</option>
           <option value="mass">MassMarks</option>
           <option value="rectangle">Rectangle</option>
@@ -33,6 +35,7 @@ const App = () => {
         <MyBezier visible={overlay === 'bezier'} />
         <MyCircle visible={overlay === 'circle'} />
         <MyEllipse visible={overlay === 'ellipse'} />
+        <MyHeatMap visible={overlay === 'heat'} />
         <MyMarker
           count={count}
           setCount={setCount}

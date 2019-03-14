@@ -60,6 +60,16 @@ export interface EllipseProps extends BasicShapeProps {
   opts?: EllipseOptions
 }
 
+export interface HeatMapOptions extends AMap.HeatmapOptions {
+  dataset?: AMap.HeatmapDataset
+  visible?: boolean
+}
+
+export interface HeatMapProps {
+  id?: string
+  opts?: HeatMapOptions
+}
+
 export interface InfoWindowOptions extends AMap.InfoWindowOptions {
   position?: AMap.LngLatLiteral
   visible?: boolean

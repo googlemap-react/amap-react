@@ -35,6 +35,19 @@ class Ellipse {
   }
 }
 
+class Heatmap {
+  opts: AMap.HeatmapOptions
+  hide = () => {}
+  setDataSet = (dataset: AMap.HeatmapDataset) => {}
+  setOptions = (opts: AMap.HeatmapOptions) => {
+    this.opts = opts
+  }
+  show = () => {}
+  constructor(map: AMap.Map, opts: AMap.HeatmapOptions) {
+    this.opts = opts
+  }
+}
+
 class Icon {
   constructor(opts: AMap.IconOptions) {}
 }
@@ -72,6 +85,9 @@ class Map {
   clearMap = () => {}
   destroy = () => {}
   getCenter = () => this.center
+  plugin = (name: string | string[], callback: Function) => {
+    callback()
+  }
   setCenter = (center: AMap.LngLat) => {
     this.center = center
   }
@@ -199,6 +215,7 @@ const defineGlobalVariable = () => {
         addListener: () => {},
         removeListener: () => {},
       },
+      Heatmap: Heatmap,
       Icon: Icon,
       InfoWindow: InfoWindow,
       LngLat: LngLat,

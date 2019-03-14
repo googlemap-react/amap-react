@@ -1,6 +1,7 @@
 export {default as BezierCurve} from './src/components/BezierCurve'
 export {default as Circle} from './src/components/Circle'
 export {default as Ellipse} from './src/components/Ellipse'
+export {default as HeatMap} from './src/components/HeatMap'
 export {default as InfoWindow} from './src/components/InfoWindow'
 export {default as MapBox} from './src/components/MapBox'
 export {default as Marker} from './src/components/Marker'
