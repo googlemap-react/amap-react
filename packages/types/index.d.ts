@@ -456,6 +456,32 @@ declare namespace AMap {
 
   export type Mask = Array<LngLatLiteral[] | LngLatLiteral[][]>
 
+  export class MassMarks extends MVCObject {
+    constructor(data: Object[], opts: MassMarksOptions)
+    clear(): void
+    getData(): Object[]
+    getMap(): Map
+    getStyle(): StyleObjectOptions | StyleObjectOptions[]
+    hide(): void
+    setData(data: Object[]): void
+    setMap(map: Map): void
+    setStyle(style: StyleObjectOptions | StyleObjectOptions[]): void
+    show(): void
+  }
+
+  export interface MassMarksOptions {
+    alwaysRender?: boolean
+    cursor?: string
+    opacity?: number
+    style?:
+      | StyleObjectOptions
+      | StyleObjectOptions[]
+      | StyleObjectOptionsLiteral
+      | StyleObjectOptionsLiteral[]
+    zIndex?: number
+    zooms?: number[]
+  }
+
   export class MVCObject {
     off(eventName: string, handler: Function, context?: Object): void
     on(eventName: string, handler: Function, context?: Object): void
@@ -582,6 +608,20 @@ declare namespace AMap {
     scrollWheel?: boolean
     touchZoom?: boolean
     zoomEnable?: boolean
+  }
+
+  export interface StyleObjectOptions {
+    anchor: Pixel
+    rotation?: number
+    size: Size
+    url: string
+  }
+
+  export interface StyleObjectOptionsLiteral {
+    anchor: PixelLiteral
+    rotation?: number
+    size: SizeLiteral
+    url: string
   }
 
   export class TileLayer extends MVCObject {

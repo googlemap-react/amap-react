@@ -4,6 +4,7 @@ import MyCircle from './components/MyCircle'
 import MyEllipse from './components/MyEllipse'
 import MyMapBox from './components/MyMapBox'
 import MyMarker from './components/MyMarker'
+import MyMassMarks from './components/MyMassMarks'
 import MyRectangle from './components/MyRectangle'
 import MyPolygon from './components/MyPolygon'
 import MyPolyline from './components/MyPolyline'
@@ -23,6 +24,7 @@ const App = () => {
           <option value="circle">Circle</option>
           <option value="ellipse">Ellipse</option>
           <option value="marker">Marker'n'InfoWindow</option>
+          <option value="mass">MassMarks</option>
           <option value="rectangle">Rectangle</option>
           <option value="polygon">Polygon with holes</option>
           <option value="polyline">Polyline</option>
@@ -36,6 +38,7 @@ const App = () => {
           setCount={setCount}
           visible={overlay === 'marker'}
         />
+        <MyMassMarks visible={overlay === 'mass'} />
         <MyRectangle visible={overlay === 'rectangle'} />
         <MyPolygon count={count} visible={overlay === 'polygon'} />
         <MyPolyline visible={overlay === 'polyline'} />

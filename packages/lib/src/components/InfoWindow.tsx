@@ -8,7 +8,6 @@ const InfoWindow = ({
   children,
   anchorId,
   opts = {},
-  visible,
   onChange,
   onClose,
   onOpen,
@@ -59,7 +58,7 @@ const InfoWindow = ({
     }
 
     // Open or close the info window according to the `visible` prop
-    if (visible) {
+    if (opts.visible) {
       infoWindow.open(
         state.map,
         anchor
@@ -77,7 +76,7 @@ const InfoWindow = ({
     return () => {
       if (anchorListener) AMap.event.removeListener(anchorListener)
     }
-  }, [infoWindow, anchorId, visible])
+  }, [infoWindow, anchorId, opts.visible])
 
   // Register event listeners
   useAMapListener(infoWindow, [

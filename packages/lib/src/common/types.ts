@@ -62,13 +62,13 @@ export interface EllipseProps extends BasicShapeProps {
 
 export interface InfoWindowOptions extends AMap.InfoWindowOptions {
   position?: AMap.LngLatLiteral
+  visible?: boolean
 }
 
 export interface InfoWindowProps {
   children?: React.ReactNode
   anchorId?: string
   opts?: InfoWindowOptions
-  visible?: boolean
   onChange?: () => void
   onClose?: () => void
   onOpen?: () => void
@@ -140,6 +140,25 @@ export interface MarkerProps {
   onRightClick?: (event: AMap.MapsEvent) => void
   onTouchEnd?: (event: AMap.MapsEvent) => void
   onTouchMove?: (event: AMap.MapsEvent) => void
+  onTouchStart?: (event: AMap.MapsEvent) => void
+}
+
+export interface MassMarksOptions extends AMap.MassMarksOptions {
+  style?: AMap.StyleObjectOptionsLiteral | AMap.StyleObjectOptionsLiteral[]
+  visible?: boolean
+}
+
+export interface MassMarksProps {
+  id?: string
+  data?: Object[]
+  opts?: MassMarksOptions
+  onClick?: (event: AMap.MapsEvent) => void
+  onComplete?: () => void
+  onDoubleClick?: (event: AMap.MapsEvent) => void
+  onMouseDown?: (event: AMap.MapsEvent) => void
+  onMouseOut?: (event: AMap.MapsEvent) => void
+  onMouseUp?: (event: AMap.MapsEvent) => void
+  onTouchEnd?: (event: AMap.MapsEvent) => void
   onTouchStart?: (event: AMap.MapsEvent) => void
 }
 

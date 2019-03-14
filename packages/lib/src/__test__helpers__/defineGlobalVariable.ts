@@ -128,6 +128,28 @@ class Marker {
   }
 }
 
+class MassMarks {
+  data?: Object[]
+  map?: AMap.Map
+  opts: AMap.MassMarksOptions
+  style?: AMap.StyleObjectOptions | AMap.StyleObjectOptions[]
+  hide = () => {}
+  setData = (data: Object[]) => {
+    this.data = data
+  }
+  setMap = (map: AMap.Map) => {
+    this.map = map
+  }
+  setStyle = (style: AMap.StyleObjectOptions | AMap.StyleObjectOptions[]) => {
+    this.style = style
+  }
+  show = () => {}
+  constructor(data: Object[], opts: AMap.MassMarksOptions) {
+    this.data = data
+    this.opts = opts
+  }
+}
+
 class Pixel {
   constructor(x: number, y: number) {}
 }
@@ -182,6 +204,7 @@ const defineGlobalVariable = () => {
       LngLat: LngLat,
       Map: Map,
       Marker: Marker,
+      MassMarks: MassMarks,
       Pixel: Pixel,
       Polygon: Polygon,
       Polyline: Polyline,

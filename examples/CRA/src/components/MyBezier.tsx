@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {BezierCurve} from '../lib'
 
 const MyBezier = ({visible}: {visible: boolean}) => {
