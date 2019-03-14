@@ -154,13 +154,13 @@ export interface MarkerProps {
 }
 
 export interface MassMarksOptions extends AMap.MassMarksOptions {
+  data: AMap.MassMarkLiteral[]
   style?: AMap.StyleObjectOptionsLiteral | AMap.StyleObjectOptionsLiteral[]
   visible?: boolean
 }
 
 export interface MassMarksProps {
   id?: string
-  data?: AMap.MassMarkLiteral[]
   opts?: MassMarksOptions
   onClick?: (event: AMap.MapsEvent) => void
   onComplete?: () => void

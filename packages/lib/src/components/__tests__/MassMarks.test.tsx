@@ -29,7 +29,11 @@ describe('MassMarks', () => {
     const {container, rerender} = render(
       <AMapProvider>
         <MapBox apiKey="FAKE_KEY" />
-        <MassMarks data={MARKS_DATA} />
+        <MassMarks
+          opts={{
+            data: MARKS_DATA,
+          }}
+        />
       </AMapProvider>,
     )
     await wait(() => {
@@ -39,7 +43,11 @@ describe('MassMarks', () => {
       rerender(
         <AMapProvider>
           <MapBox apiKey="FAKE_KEY" />
-          <MassMarks data={MARKS_DATA_NEW} />
+          <MassMarks
+            opts={{
+              data: MARKS_DATA_NEW,
+            }}
+          />
         </AMapProvider>,
       ),
     )
@@ -48,8 +56,8 @@ describe('MassMarks', () => {
         <AMapProvider>
           <MapBox apiKey="FAKE_KEY" />
           <MassMarks
-            data={MARKS_DATA}
             opts={{
+              data: MARKS_DATA,
               style: {
                 anchor: {
                   x: 0,

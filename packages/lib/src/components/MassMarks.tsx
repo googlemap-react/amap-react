@@ -6,8 +6,7 @@ import {useAMapListener} from '../hooks'
 
 const MassMarks = ({
   id,
-  data = [],
-  opts = {},
+  opts = {data: []},
   onClick,
   onComplete,
   onDoubleClick,
@@ -18,7 +17,6 @@ const MassMarks = ({
   onTouchStart,
 }: MassMarksProps) => {
   const {state, dispatch} = useContext(AMapContext)
-  const [prevData, setPrevData] = useState('')
   const [prevOpts, setPrevOpts] = useState('')
   const [massMarks, setMassMarks] = useState<AMap.MassMarks | undefined>(
     undefined,
@@ -32,30 +30,25 @@ const MassMarks = ({
 
   useEffect(() => {
     if (state.map === undefined) return
+    const {data, style, visible, ...otherOpts} = opts
     const massMarks = new AMap.MassMarks(
       data.map(point => ({
         ...point,
         lnglat: [point.lng, point.lat],
       })),
       {
-        ...opts,
-        style: opts.style
-          ? Array.isArray(opts.style)
-            ? opts.style.map(style => ({
+        ...otherOpts,
+        style: style
+          ? Array.isArray(style)
+            ? style.map(style => ({
                 ...style,
                 anchor: new AMap.Pixel(style.anchor.x, style.anchor.y),
                 size: new AMap.Size(style.size.width, style.size.height),
               }))
             : {
-                ...opts.style,
-                anchor: new AMap.Pixel(
-                  opts.style.anchor.x,
-                  opts.style.anchor.y,
-                ),
-                size: new AMap.Size(
-                  opts.style.size.width,
-                  opts.style.size.height,
-                ),
+                ...style,
+                anchor: new AMap.Pixel(style.anchor.x, style.anchor.y),
+                size: new AMap.Size(style.size.width, style.size.height),
               }
           : {
               anchor: new AMap.Pixel(0, 0),
@@ -65,10 +58,9 @@ const MassMarks = ({
       },
     )
     massMarks.setMap(state.map)
-    if (opts.visible === undefined || opts.visible) massMarks.show()
+    if (visible === undefined || visible) massMarks.show()
     else massMarks.hide()
     setMassMarks(massMarks)
-    setPrevData(JSON.stringify(data))
     setPrevOpts(JSON.stringify(opts))
 
     // Add the massMarks to state.objects
@@ -93,20 +85,19 @@ const MassMarks = ({
   // Modify the AMap.MassMarks object when component props change
   useEffect(() => {
     if (massMarks === undefined) return
-    if (data !== undefined && JSON.stringify(data) !== prevData) {
+    if (opts !== undefined && JSON.stringify(opts) !== prevOpts) {
+      const {data, style, visible, ...otherOpts} = opts
       massMarks.setData(
         data.map(point => ({
           ...point,
           lnglat: [point.lng, point.lat],
         })),
       )
-      setPrevData(JSON.stringify(data))
-    }
-    if (opts !== undefined && JSON.stringify(opts) !== prevOpts) {
-      if (opts.style) {
-        if (Array.isArray(opts.style))
+
+      if (style) {
+        if (Array.isArray(style))
           massMarks.setStyle(
-            opts.style.map(style => ({
+            style.map(style => ({
               ...style,
               anchor: new AMap.Pixel(style.anchor.x, style.anchor.y),
               size: new AMap.Size(style.size.width, style.size.height),
@@ -114,16 +105,16 @@ const MassMarks = ({
           )
         else
           massMarks.setStyle({
-            ...opts.style,
-            anchor: new AMap.Pixel(opts.style.anchor.x, opts.style.anchor.y),
-            size: new AMap.Size(opts.style.size.width, opts.style.size.height),
+            ...style,
+            anchor: new AMap.Pixel(style.anchor.x, style.anchor.y),
+            size: new AMap.Size(style.size.width, style.size.height),
           })
       }
-      if (opts.visible === undefined || opts.visible) massMarks.show()
+      if (visible === undefined || visible) massMarks.show()
       else massMarks.hide()
       setPrevOpts(JSON.stringify(opts))
     }
-  }, [massMarks, data, opts])
+  }, [massMarks, opts])
 
   return null
 }
