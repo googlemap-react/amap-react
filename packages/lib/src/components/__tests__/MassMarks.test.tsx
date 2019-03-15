@@ -27,8 +27,8 @@ describe('MassMarks', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <MassMarks
           opts={{
             data: MARKS_DATA,
@@ -41,8 +41,8 @@ describe('MassMarks', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <MassMarks
             opts={{
               data: MARKS_DATA_NEW,
@@ -53,8 +53,8 @@ describe('MassMarks', () => {
     )
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <MassMarks
             opts={{
               data: MARKS_DATA,
@@ -79,8 +79,8 @@ describe('MassMarks', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <MassMarks id="massMarks" />
           <MassMarks id="massMarks" />
         </AMapProvider>,

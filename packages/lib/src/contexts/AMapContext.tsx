@@ -6,7 +6,8 @@ import {
   AMapState,
 } from '../common/types'
 
-const initialState = (): AMapState => ({
+const initialState = (apiKey: string): AMapState => ({
+  apiKey,
   map: undefined,
   objects: new Map<string, Object>(),
 })
@@ -23,7 +24,7 @@ const reducer = (state: AMapState, action: AMapAction) => {
         state.map.clearMap()
         state.map.destroy()
       }
-      return initialState()
+      return {...state, map: undefined, objects: new Map<string, Object>()}
 
     case 'init_map':
       if (action.map === undefined)
@@ -60,8 +61,8 @@ const reducer = (state: AMapState, action: AMapAction) => {
   }
 }
 
-const AMapProvider = ({children}: AMapProviderProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState())
+const AMapProvider = ({apiKey, children}: AMapProviderProps) => {
+  const [state, dispatch] = useReducer(reducer, initialState(apiKey))
   const value = {state, dispatch}
 
   return (

@@ -15,8 +15,8 @@ describe('Layer', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <Layer
           opts={{
             zooms: [3, 17],
@@ -29,8 +29,8 @@ describe('Layer', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Layer
             opts={{
               opacity: 0.6,
@@ -42,8 +42,8 @@ describe('Layer', () => {
     )
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Layer
             opts={{
               opacity: 0.8,
@@ -58,8 +58,8 @@ describe('Layer', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Layer id="layer" />
           <Layer id="layer" />
         </AMapProvider>,

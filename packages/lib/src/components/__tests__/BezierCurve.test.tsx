@@ -15,8 +15,8 @@ describe('BezierCurve', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <BezierCurve />
       </AMapProvider>,
     )
@@ -25,8 +25,8 @@ describe('BezierCurve', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <BezierCurve
             opts={{
               path: [[[116, 4, 39.9]], [[0, 0], [36.2, 39.7]]],
@@ -40,8 +40,8 @@ describe('BezierCurve', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <BezierCurve id="bezierCurve" />
           <BezierCurve id="bezierCurve" />
         </AMapProvider>,

@@ -15,8 +15,8 @@ describe('InfoWindow', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <InfoWindow />
       </AMapProvider>,
     )
@@ -25,8 +25,8 @@ describe('InfoWindow', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Marker id="marker" />
           <InfoWindow
             opts={{
@@ -41,8 +41,8 @@ describe('InfoWindow', () => {
     )
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Marker id="marker" />
           <InfoWindow
             opts={{
@@ -59,8 +59,8 @@ describe('InfoWindow', () => {
 
   it('can have children', async () => {
     const {container} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <InfoWindow opts={{visible: true}}>I am children</InfoWindow>
       </AMapProvider>,
     )

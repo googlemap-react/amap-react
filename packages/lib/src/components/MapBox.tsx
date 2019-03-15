@@ -5,7 +5,6 @@ import {AMapContext} from '../contexts/AMapContext'
 import {useAMapAPI, useAMapListener} from '../hooks'
 
 const MapBox = ({
-  apiKey,
   className,
   opts = {},
   style,
@@ -41,7 +40,7 @@ const MapBox = ({
   onZoomStart,
 }: MapBoxProps) => {
   // Get access to the AMap context
-  const {dispatch} = useContext(AMapContext)
+  const {state, dispatch} = useContext(AMapContext)
   const [prevOpts, setPrevOpts] = useState('')
   const [map, setMap] = useState<AMap.Map | undefined>(undefined)
 
@@ -53,7 +52,7 @@ const MapBox = ({
   const reset = () => dispatch({type: 'reset'})
 
   const loaded = useAMapAPI({
-    apiKey: apiKey,
+    apiKey: state.apiKey,
   })
 
   // Load AMap

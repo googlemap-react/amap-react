@@ -15,8 +15,8 @@ describe('Polyline', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <Polyline
           opts={{
             path: [{lng: 30, lat: 19}, {lng: 36, lat: 19}, {lng: 39, lat: 20}],
@@ -29,8 +29,8 @@ describe('Polyline', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Polyline
             opts={{
               path: [
@@ -48,8 +48,8 @@ describe('Polyline', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Polyline id="polyline" />
           <Polyline id="polyline" />
         </AMapProvider>,

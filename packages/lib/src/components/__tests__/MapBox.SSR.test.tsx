@@ -10,8 +10,8 @@ describe('MapBox', () => {
   it('does not render map at server side', () => {
     expect(
       renderToString(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
         </AMapProvider>,
       ),
     ).not.toMatch('map')

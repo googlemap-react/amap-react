@@ -19,7 +19,7 @@ const App = () => {
   const [traffic, setTraffic] = useState(false)
   return (
     <>
-      <AMapProvider>
+      <AMapProvider apiKey="36e0a42580b8f766b4bfe2a5f4169560">
         <select
           defaultValue="bezier"
           onChange={event => setOverlay(event.target.value)}

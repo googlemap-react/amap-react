@@ -36,8 +36,8 @@ describe('Polygon', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <Polygon
           opts={{
             path2D: PATH_2D,
@@ -50,8 +50,8 @@ describe('Polygon', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Polygon
             opts={{
               path: [
@@ -66,8 +66,8 @@ describe('Polygon', () => {
     )
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Polygon
             opts={{
               path2D: PATH_2D,
@@ -81,8 +81,8 @@ describe('Polygon', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Polygon id="polygon" />
           <Polygon id="polygon" />
         </AMapProvider>,

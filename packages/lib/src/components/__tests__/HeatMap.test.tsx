@@ -31,8 +31,8 @@ describe('HeatMap', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <HeatMap
           opts={{
             dataset: HEAT_MAP_DATASET,
@@ -46,8 +46,8 @@ describe('HeatMap', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <HeatMap
             opts={{
               dataset: HEAT_MAP_DATASET_NEW,
@@ -60,8 +60,8 @@ describe('HeatMap', () => {
     )
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <HeatMap
             opts={{
               dataset: HEAT_MAP_DATASET_NEW,
@@ -77,8 +77,8 @@ describe('HeatMap', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <HeatMap id="heatMap" />
           <HeatMap id="heatMap" />
         </AMapProvider>,

@@ -21,8 +21,8 @@ describe('MapBox', () => {
 
   it('does not render map if fetch failed', async () => {
     const {container} = render(
-      <AMapProvider>
-        <MapBox apiKey="INVALID_KEY" />
+      <AMapProvider apiKey="INVALID_KEY">
+        <MapBox />
       </AMapProvider>,
     )
     expect(container.innerHTML).toMatch('Loading...')
@@ -35,8 +35,8 @@ describe('MapBox', () => {
 
   it('renders map after fetch succeeded', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
       </AMapProvider>,
     )
     expect(container.innerHTML).toMatch('Loading...')
@@ -46,9 +46,8 @@ describe('MapBox', () => {
     expect(loadjs.reset).not.toHaveBeenCalled()
     act(() =>
       rerender(
-        <AMapProvider>
+        <AMapProvider apiKey="FAKE_KEY">
           <MapBox
-            apiKey="FAKE_KEY"
             opts={{
               center: {lat: 39, lng: 116},
               features: (['bd'] as unknown) as AMap.Feature[],

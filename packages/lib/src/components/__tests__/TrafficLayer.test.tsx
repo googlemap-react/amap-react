@@ -14,8 +14,8 @@ describe('TrafficLayer', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <TrafficLayer />
       </AMapProvider>,
     )

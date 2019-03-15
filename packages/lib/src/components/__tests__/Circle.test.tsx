@@ -15,8 +15,8 @@ describe('Circle', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <Circle />
       </AMapProvider>,
     )
@@ -25,8 +25,8 @@ describe('Circle', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Circle
             opts={{
               center: {lng: 116, lat: 39},
@@ -41,8 +41,8 @@ describe('Circle', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Circle id="circle" />
           <Circle id="circle" />
         </AMapProvider>,

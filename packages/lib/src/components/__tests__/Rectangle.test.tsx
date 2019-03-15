@@ -15,8 +15,8 @@ describe('Rectangle', () => {
 
   it('can be rendered', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <Rectangle />
       </AMapProvider>,
     )
@@ -25,8 +25,8 @@ describe('Rectangle', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Rectangle
             opts={{
               bounds: {
@@ -43,8 +43,8 @@ describe('Rectangle', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Rectangle id="rectangle" />
           <Rectangle id="rectangle" />
         </AMapProvider>,

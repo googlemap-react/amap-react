@@ -8,6 +8,7 @@ export interface AMapReducer {
 }
 
 export interface AMapState {
+  apiKey: string
   map?: AMap.Map
   objects: Map<string, Object>
 }
@@ -20,6 +21,7 @@ export interface AMapAction {
 }
 
 export interface AMapProviderProps {
+  apiKey: string
   children: React.ReactNode
 }
 
@@ -96,7 +98,6 @@ export interface MapBoxOptions extends AMap.MapOptions {
 }
 
 export interface MapBoxProps {
-  apiKey: string
   className?: string
   opts?: MapBoxOptions
   style?: React.CSSProperties

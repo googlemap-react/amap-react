@@ -15,8 +15,8 @@ describe('Marker', () => {
 
   it('can be rendered', async () => {
     const {container} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <Marker />
       </AMapProvider>,
     )
@@ -28,8 +28,8 @@ describe('Marker', () => {
 
   it('updates options after rerender', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <Marker opts={{position: {lat: 39, lng: 116}}} />
       </AMapProvider>,
     )
@@ -38,16 +38,16 @@ describe('Marker', () => {
     })
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Marker opts={{position: {lat: 39, lng: 116}, visible: false}} />
         </AMapProvider>,
       ),
     )
     act(() =>
       rerender(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Marker
             id="my-marker"
             opts={{
@@ -71,8 +71,8 @@ describe('Marker', () => {
   it('of same id cannot be added twice', async () => {
     const check = async () => {
       const {container} = render(
-        <AMapProvider>
-          <MapBox apiKey="FAKE_KEY" />
+        <AMapProvider apiKey="FAKE_KEY">
+          <MapBox />
           <Marker id="marker" />
           <Marker id="marker" />
         </AMapProvider>,
@@ -87,8 +87,8 @@ describe('Marker', () => {
 
   it.concurrent('can have children', async () => {
     const {container, rerender} = render(
-      <AMapProvider>
-        <MapBox apiKey="FAKE_KEY" />
+      <AMapProvider apiKey="FAKE_KEY">
+        <MapBox />
         <Marker>I am children</Marker>
       </AMapProvider>,
     )
