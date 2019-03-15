@@ -216,7 +216,6 @@ export interface SearchBoxProps {
   style?: React.CSSProperties
   id?: string
   opts?: AMap.AutoCompleteOptions
-  standalone?: boolean
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onChoose?: ({type, poi}: {type: 'choose'; poi: AMap.POI}) => void
   onComplete?: (result: AMap.AutoCompleteResult) => void

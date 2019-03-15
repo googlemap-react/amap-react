@@ -1,6 +1,25 @@
 import {EventEmitter} from 'events'
 import {removeListener} from 'cluster'
 
+class Autocomplete {
+  constructor(opts: AMap.AutoCompleteOptions) {
+    this.opts = opts
+  }
+  city?: string
+  cityLimit?: boolean
+  type?: string
+  opts: AMap.AutoCompleteOptions
+  setCity = (city: string) => {
+    this.city = city
+  }
+  setCityLimit = (cityLimit: boolean) => {
+    this.cityLimit = cityLimit
+  }
+  setType = (type: string) => {
+    this.type = type
+  }
+}
+
 class BezierCurve {
   constructor(opts: AMap.BezierCurveOptions) {
     this.opts = opts
@@ -170,6 +189,10 @@ class Pixel {
   constructor(x: number, y: number) {}
 }
 
+function plugin(serviceNames: string[], callback: Function) {
+  callback()
+}
+
 class Polygon {
   constructor(opts: AMap.PolygonOptions) {
     this.opts = opts
@@ -235,6 +258,7 @@ class Traffic extends TileLayer {
 const defineGlobalVariable = () => {
   Object.defineProperty(global, 'AMap', {
     value: {
+      Autocomplete,
       BezierCurve,
       Bounds,
       Circle,
@@ -250,6 +274,7 @@ const defineGlobalVariable = () => {
       Map,
       Marker,
       MassMarks,
+      plugin,
       Pixel,
       Polygon,
       Polyline,

@@ -13,7 +13,7 @@ describe('RoadNetLayer', () => {
   })
 
   it('can be rendered', async () => {
-    const {container, rerender} = render(
+    const {container} = render(
       <AMapProvider apiKey="FAKE_KEY">
         <MapBox />
         <RoadNetLayer />
