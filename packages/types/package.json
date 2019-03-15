@@ -1,6 +1,6 @@
 {
   "name": "@googlemap-react/amap-types",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "description": "Type definitions for AMap",
   "repository": "git@github.com:googlemap-react/amap-react.git",
   "author": "Gabriel Wu <qqbbnease1004@126.com>",
