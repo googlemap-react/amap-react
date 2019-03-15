@@ -51,9 +51,7 @@ const MapBox = ({
   const initMap = (map: AMap.Map) => dispatch({type: 'init_map', map: map})
   const reset = () => dispatch({type: 'reset'})
 
-  const loaded = useAMapAPI({
-    apiKey: state.apiKey,
-  })
+  const loaded = useAMapAPI(state.apiKey)
 
   // Load AMap
   useEffect(() => {

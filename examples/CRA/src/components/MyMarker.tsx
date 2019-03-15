@@ -1,6 +1,6 @@
 import React from 'react'
 import Pentagram from './Pentagram'
-import {InfoWindow, Marker} from '../lib'
+import {InfoWindow, Marker, SearchBox} from '../lib'
 
 interface MyMarkerProps {
   count: number

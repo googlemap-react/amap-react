@@ -12,6 +12,7 @@ export {default as Polygon} from './src/components/Polygon'
 export {default as Polyline} from './src/components/Polyline'
 export {default as RoadNetLayer} from './src/components/RoadNetLayer'
 export {default as SatelliteLayer} from './src/components/SatelliteLayer'
+export {default as SearchBox} from './src/components/SearchBox'
 export {default as TrafficLayer} from './src/components/TrafficLayer'
 export {
   AMapConsumer,

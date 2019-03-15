@@ -9,7 +9,13 @@ import MyMassMarks from './components/MyMassMarks'
 import MyRectangle from './components/MyRectangle'
 import MyPolygon from './components/MyPolygon'
 import MyPolyline from './components/MyPolyline'
-import {AMapProvider, RoadNetLayer, SatelliteLayer, TrafficLayer} from './lib'
+import {
+  AMapProvider,
+  RoadNetLayer,
+  SatelliteLayer,
+  SearchBox,
+  TrafficLayer,
+} from './lib'
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -70,6 +76,7 @@ const App = () => {
         <RoadNetLayer opts={{visible: roadNet}} />
         <SatelliteLayer opts={{visible: satellite}} />
         <TrafficLayer opts={{visible: traffic}} />
+        <SearchBox />
       </AMapProvider>
     </>
   )

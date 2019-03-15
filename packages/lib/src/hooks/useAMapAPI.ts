@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react'
 import loadjs from 'loadjs'
 import {AMAP_BASE_URI} from '../common/constants'
-import {AMapAPIProps} from '../common/types'
 
-const useAMapAPI = ({apiKey}: AMapAPIProps) => {
+const useAMapAPI = (apiKey: string) => {
   const [loaded, setLoaded] = useState(false)
   useEffect(() => {
     // Should not load script at server side

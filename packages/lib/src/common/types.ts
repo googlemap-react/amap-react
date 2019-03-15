@@ -1,7 +1,3 @@
-export interface AMapAPIProps {
-  apiKey: string
-}
-
 export interface AMapReducer {
   state: AMapState
   dispatch: React.Dispatch<AMapAction>
@@ -213,6 +209,19 @@ export interface RoadNetLayerProps {
 export interface SatelliteLayerProps {
   opts?: AMap.SatelliteOptions
   onComplete?: () => void
+}
+
+export interface SearchBoxProps {
+  className?: string
+  style?: React.CSSProperties
+  id?: string
+  opts?: AMap.AutoCompleteOptions
+  standalone?: boolean
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChoose?: ({type, poi}: {type: 'choose'; poi: AMap.POI}) => void
+  onComplete?: (result: AMap.AutoCompleteResult) => void
+  onError?: (error: string) => void
+  onSelect?: ({type, poi}: {type: 'select'; poi: AMap.POI}) => void
 }
 
 export interface TrafficLayerProps {

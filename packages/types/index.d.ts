@@ -9,14 +9,43 @@ declare namespace AMap {
     | 'bottom-left'
     | 'bottom-center'
     | 'bottom-right'
+
   export type Animation =
     | 'AMAP_ANIMATION_BOUNCE'
     | 'AMAP_ANIMATION_DROP'
     | 'AMAP_ANIMATION_NONE'
+
   export class ArrayBounds {
     constructor(bounds: Array<LngLat | Pixel>)
     bounds: Array<LngLat | Pixel>
     contains(point: LngLat | Pixel): boolean
+  }
+
+  export class Autocomplete extends MVCObject {
+    constructor(opts: AutoCompleteOptions)
+    search(
+      keyword: string,
+      callback: (status: string, result: string | AutoCompleteResult) => void,
+    ): void
+    setCity(city: string): void
+    setCityLimit(cityLimit: boolean): void
+    setType(type: string): void
+  }
+
+  export interface AutoCompleteOptions {
+    city?: string
+    citylimit?: boolean
+    datatype?: 'all' | 'poi' | 'bus' | 'busline'
+    input?: string | HTMLInputElement
+    output?: string | HTMLDivElement
+    outPutDirAuto?: boolean
+    type?: string
+  }
+
+  export interface AutoCompleteResult {
+    count: number
+    info: string
+    tips: Tip[]
   }
 
   export class BasicShape extends MVCObject {
@@ -549,6 +578,18 @@ declare namespace AMap {
     y: number
   }
 
+  function plugin(serviceNames: string[], callback: Function): void
+
+  export interface POI {
+    adcode: string
+    address?: string
+    district: string
+    id: string
+    location?: LngLat
+    name: string
+    typecode: string
+  }
+
   export class Polygon extends BasicShape {
     constructor(opts: PolygonOptions)
     contains(point: LngLat): boolean
@@ -684,6 +725,12 @@ declare namespace AMap {
     visible?: boolean
     zIndex?: number
     zooms?: number[]
+  }
+
+  export interface Tip {
+    adcode: string
+    district: string
+    name: string
   }
 
   class Traffic extends TileLayer {
