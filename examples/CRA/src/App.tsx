@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MyBezier from './components/MyBezier'
 import MyCircle from './components/MyCircle'
 import MyEllipse from './components/MyEllipse'
@@ -9,11 +9,14 @@ import MyMassMarks from './components/MyMassMarks'
 import MyRectangle from './components/MyRectangle'
 import MyPolygon from './components/MyPolygon'
 import MyPolyline from './components/MyPolyline'
-import {AMapProvider} from './lib'
+import {AMapProvider, RoadNetLayer, SatelliteLayer, TrafficLayer} from './lib'
 
 const App = () => {
-  const [count, setCount] = React.useState(0)
-  const [overlay, setOverlay] = React.useState('bezier')
+  const [count, setCount] = useState(0)
+  const [overlay, setOverlay] = useState('bezier')
+  const [roadNet, setRoadNet] = useState(false)
+  const [satellite, setSatellite] = useState(false)
+  const [traffic, setTraffic] = useState(false)
   return (
     <>
       <AMapProvider>
@@ -31,6 +34,25 @@ const App = () => {
           <option value="polygon">Polygon with holes</option>
           <option value="polyline">Polyline</option>
         </select>
+        <input
+          type="checkbox"
+          name="road-net"
+          onChange={() => setRoadNet(state => !state)}
+        />
+        RoadNet
+        <input
+          type="checkbox"
+          name="satellite"
+          onChange={() => setSatellite(state => !state)}
+        />
+        Satellite
+        <input
+          type="checkbox"
+          name="traffic"
+          onChange={() => setTraffic(state => !state)}
+        />
+        Traffic
+        <hr />
         <MyMapBox />
         <MyBezier visible={overlay === 'bezier'} />
         <MyCircle visible={overlay === 'circle'} />
@@ -45,6 +67,9 @@ const App = () => {
         <MyRectangle visible={overlay === 'rectangle'} />
         <MyPolygon count={count} visible={overlay === 'polygon'} />
         <MyPolyline visible={overlay === 'polyline'} />
+        <RoadNetLayer opts={{visible: roadNet}} />
+        <SatelliteLayer opts={{visible: satellite}} />
+        <TrafficLayer opts={{visible: traffic}} />
       </AMapProvider>
     </>
   )

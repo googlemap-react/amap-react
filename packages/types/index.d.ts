@@ -600,26 +600,14 @@ declare namespace AMap {
     setOpacity(alpha: number): void
   }
 
-  export interface RoadNetOptions {
-    detectRetina?: boolean
-    map: Map
-    opacity?: number
-    zIndex?: number
-    zooms?: number[]
-  }
+  export interface RoadNetOptions extends TileLayerOptions {}
 
   class Satellite extends TileLayer {
     constructor(opts: SatelliteOptions)
     setOpacity(alpha: number): void
   }
 
-  export interface SatelliteOptions {
-    detectRetina?: boolean
-    map: Map
-    opacity?: number
-    zIndex?: number
-    zooms?: number[]
-  }
+  export interface SatelliteOptions extends TileLayerOptions {}
 
   export interface Shop {
     building_id: string
@@ -676,6 +664,7 @@ declare namespace AMap {
     hide(): void
     reload(): void
     setMap(map: Map | null): void
+    setOpacity(opacity: number): void
     setTileUrl(tileUrl: string): void
     setzIndex(zIndex: number): void
     show(): void
@@ -688,10 +677,11 @@ declare namespace AMap {
     detectRetina?: boolean
     errorUrl?: string
     getTileUrl?: string | Function
-    map: Map
+    map?: Map
     opacity?: number
     tileSize?: number
     tileUrl?: string
+    visible?: boolean
     zIndex?: number
     zooms?: number[]
   }
@@ -701,14 +691,9 @@ declare namespace AMap {
     setOpacity(alpha: number): void
   }
 
-  export interface TrafficOptions {
+  export interface TrafficOptions extends TileLayerOptions {
     autoRefresh?: boolean
-    detectRetina?: boolean
-    map: Map
     interval?: number
-    opacity?: number
-    zIndex?: number
-    zooms?: number[]
   }
 
   export class View2D {

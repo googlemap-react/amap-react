@@ -84,6 +84,13 @@ export interface InfoWindowProps {
   onOpen?: () => void
 }
 
+export interface LayerProps {
+  id?: string
+  opts?: AMap.TileLayerOptions
+  type?: 'RoadNet' | 'Satellite' | 'Traffic'
+  onComplete?: () => void
+}
+
 export interface MapBoxOptions extends AMap.MapOptions {
   center?: AMap.LngLatLiteral
 }
@@ -172,14 +179,6 @@ export interface MassMarksProps {
   onTouchStart?: (event: AMap.MapsEvent) => void
 }
 
-export interface RectangleOptions extends AMap.RectangleOptions {
-  bounds?: AMap.BoundsLiteral
-}
-
-export interface RectangleProps extends BasicShapeProps {
-  opts?: RectangleOptions
-}
-
 export interface PolygonOptions extends AMap.PolygonOptions {
   path?: AMap.LngLatLiteral[]
   path2D?: AMap.LngLatLiteral[][]
@@ -195,4 +194,27 @@ export interface PolylineOptions extends AMap.PolylineOptions {
 
 export interface PolylineProps extends BasicShapeProps {
   opts?: PolylineOptions
+}
+
+export interface RectangleOptions extends AMap.RectangleOptions {
+  bounds?: AMap.BoundsLiteral
+}
+
+export interface RectangleProps extends BasicShapeProps {
+  opts?: RectangleOptions
+}
+
+export interface RoadNetLayerProps {
+  opts?: AMap.RoadNetOptions
+  onComplete?: () => void
+}
+
+export interface SatelliteLayerProps {
+  opts?: AMap.SatelliteOptions
+  onComplete?: () => void
+}
+
+export interface TrafficLayerProps {
+  opts?: AMap.TrafficOptions
+  onComplete?: () => void
 }

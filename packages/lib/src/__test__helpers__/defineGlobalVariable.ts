@@ -2,11 +2,11 @@ import {EventEmitter} from 'events'
 import {removeListener} from 'cluster'
 
 class BezierCurve {
-  opts: AMap.BezierCurveOptions
-  setOptions = (opts: AMap.BezierCurveOptions) => {
+  constructor(opts: AMap.BezierCurveOptions) {
     this.opts = opts
   }
-  constructor(opts: AMap.BezierCurveOptions) {
+  opts: AMap.BezierCurveOptions
+  setOptions = (opts: AMap.BezierCurveOptions) => {
     this.opts = opts
   }
 }
@@ -16,26 +16,29 @@ class Bounds {
 }
 
 class Circle {
-  opts: AMap.CircleOptions
-  setOptions = (opts: AMap.CircleOptions) => {
+  constructor(opts: AMap.CircleOptions) {
     this.opts = opts
   }
-  constructor(opts: AMap.CircleOptions) {
+  opts: AMap.CircleOptions
+  setOptions = (opts: AMap.CircleOptions) => {
     this.opts = opts
   }
 }
 
 class Ellipse {
-  opts: AMap.EllipseOptions
-  setOptions = (opts: AMap.EllipseOptions) => {
+  constructor(opts: AMap.EllipseOptions) {
     this.opts = opts
   }
-  constructor(opts: AMap.EllipseOptions) {
+  opts: AMap.EllipseOptions
+  setOptions = (opts: AMap.EllipseOptions) => {
     this.opts = opts
   }
 }
 
 class Heatmap {
+  constructor(map: AMap.Map, opts: AMap.HeatmapOptions) {
+    this.opts = opts
+  }
   opts: AMap.HeatmapOptions
   hide = () => {}
   setDataSet = (dataset: AMap.HeatmapDataset) => {}
@@ -43,9 +46,6 @@ class Heatmap {
     this.opts = opts
   }
   show = () => {}
-  constructor(map: AMap.Map, opts: AMap.HeatmapOptions) {
-    this.opts = opts
-  }
 }
 
 class Icon {
@@ -53,6 +53,9 @@ class Icon {
 }
 
 class InfoWindow {
+  constructor(opts: AMap.InfoWindowOptions) {
+    this.opts = opts
+  }
   content?: string | HTMLElement
   opts: AMap.InfoWindowOptions
   position?: AMap.LngLat
@@ -64,9 +67,6 @@ class InfoWindow {
   setPosition = (position: AMap.LngLat) => {
     this.position = position
   }
-  constructor(opts: AMap.InfoWindowOptions) {
-    this.opts = opts
-  }
 }
 
 class LngLat {
@@ -74,6 +74,9 @@ class LngLat {
 }
 
 class Map {
+  constructor(mapDiv: HTMLElement, opts: AMap.MapOptions) {
+    this.opts = opts
+  }
   center?: AMap.LngLat
   features?: AMap.Feature[]
   labelzIndex?: number
@@ -109,12 +112,12 @@ class Map {
   setZoom = (zoom: number) => {
     this.zoom = zoom
   }
-  constructor(mapDiv: HTMLElement, opts: AMap.MapOptions) {
-    this.opts = opts
-  }
 }
 
 class Marker {
+  constructor(opts: AMap.MarkerOptions) {
+    this.opts = opts
+  }
   icon?: string | AMap.Icon
   label?: AMap.MarkerLabel
   opts: AMap.MarkerOptions
@@ -139,12 +142,13 @@ class Marker {
     this.zIndex = zIndex
   }
   show = () => {}
-  constructor(opts: AMap.MarkerOptions) {
-    this.opts = opts
-  }
 }
 
 class MassMarks {
+  constructor(data: Object[], opts: AMap.MassMarksOptions) {
+    this.data = data
+    this.opts = opts
+  }
   data?: Object[]
   map?: AMap.Map
   opts: AMap.MassMarksOptions
@@ -160,10 +164,6 @@ class MassMarks {
     this.style = style
   }
   show = () => {}
-  constructor(data: Object[], opts: AMap.MassMarksOptions) {
-    this.data = data
-    this.opts = opts
-  }
 }
 
 class Pixel {
@@ -171,31 +171,31 @@ class Pixel {
 }
 
 class Polygon {
-  opts: AMap.PolygonOptions
-  setOptions = (opts: AMap.PolygonOptions) => {
+  constructor(opts: AMap.PolygonOptions) {
     this.opts = opts
   }
-  constructor(opts: AMap.PolygonOptions) {
+  opts: AMap.PolygonOptions
+  setOptions = (opts: AMap.PolygonOptions) => {
     this.opts = opts
   }
 }
 
 class Polyline {
-  opts: AMap.PolylineOptions
-  setOptions = (opts: AMap.PolylineOptions) => {
+  constructor(opts: AMap.PolylineOptions) {
     this.opts = opts
   }
-  constructor(opts: AMap.PolylineOptions) {
+  opts: AMap.PolylineOptions
+  setOptions = (opts: AMap.PolylineOptions) => {
     this.opts = opts
   }
 }
 
 class Rectangle {
-  opts: AMap.RectangleOptions
-  setOptions = (opts: AMap.RectangleOptions) => {
+  constructor(opts: AMap.RectangleOptions) {
     this.opts = opts
   }
-  constructor(opts: AMap.RectangleOptions) {
+  opts: AMap.RectangleOptions
+  setOptions = (opts: AMap.RectangleOptions) => {
     this.opts = opts
   }
 }
@@ -204,29 +204,58 @@ class Size {
   constructor(width: number, height: number) {}
 }
 
+class TileLayer {
+  constructor(opts: AMap.TileLayerOptions) {}
+  opacity?: number
+  hide = () => {}
+  setOpacity = (opacity: number) => {
+    this.opacity = opacity
+  }
+  show = () => {}
+}
+
+class RoadNet extends TileLayer {
+  constructor(opts: AMap.RoadNetOptions) {
+    super(opts)
+  }
+}
+
+class Satellite extends TileLayer {
+  constructor(opts: AMap.SatelliteOptions) {
+    super(opts)
+  }
+}
+
+class Traffic extends TileLayer {
+  constructor(opts: AMap.TrafficOptions) {
+    super(opts)
+  }
+}
+
 const defineGlobalVariable = () => {
   Object.defineProperty(global, 'AMap', {
     value: {
-      BezierCurve: BezierCurve,
-      Bounds: Bounds,
-      Circle: Circle,
-      Ellipse: Ellipse,
+      BezierCurve,
+      Bounds,
+      Circle,
+      Ellipse,
       event: {
         addListener: () => {},
         removeListener: () => {},
       },
-      Heatmap: Heatmap,
-      Icon: Icon,
-      InfoWindow: InfoWindow,
-      LngLat: LngLat,
-      Map: Map,
-      Marker: Marker,
-      MassMarks: MassMarks,
-      Pixel: Pixel,
-      Polygon: Polygon,
-      Polyline: Polyline,
-      Rectangle: Rectangle,
-      Size: Size,
+      Heatmap,
+      Icon,
+      InfoWindow,
+      LngLat,
+      Map,
+      Marker,
+      MassMarks,
+      Pixel,
+      Polygon,
+      Polyline,
+      Rectangle,
+      Size,
+      TileLayer: Object.assign(TileLayer, {RoadNet, Satellite, Traffic}),
     },
     writable: true,
   })
