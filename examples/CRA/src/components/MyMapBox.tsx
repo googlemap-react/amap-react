@@ -4,7 +4,7 @@ import {MapBox} from '../lib'
 const MyMapBox = () => (
   <MapBox
     style={{
-      height: '500px',
+      height: '95%',
       width: '100%',
     }}
     opts={{

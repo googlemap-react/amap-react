@@ -176,6 +176,21 @@ export interface MassMarksProps {
   onTouchStart?: (event: AMap.MapsEvent) => void
 }
 
+export interface PlaceSearchProps {
+  bounds?: AMap.BoundsLiteral
+  center?: AMap.LngLatLiteral
+  id?: string
+  keyword?: string
+  opts?: AMap.PlaceSearchOptions
+  radius?: number
+  standalone?: boolean
+  onComplete?: (result: AMap.SearchResult) => void
+  onError?: (error: string) => void
+  onListElementClick?: (event: AMap.SelectChangeEvent) => void
+  onMarkerClick?: (event: AMap.SelectChangeEvent) => void
+  onSelectChanged?: (event: AMap.SelectChangeEvent) => void
+}
+
 export interface PolygonOptions extends AMap.PolygonOptions {
   path?: AMap.LngLatLiteral[]
   path2D?: AMap.LngLatLiteral[][]
@@ -217,10 +232,10 @@ export interface SearchBoxProps {
   id?: string
   opts?: AMap.AutoCompleteOptions
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onChoose?: ({type, poi}: {type: 'choose'; poi: AMap.POI}) => void
+  onChoose?: ({type, poi}: {type: 'choose'; poi: AMap.Poi}) => void
   onComplete?: (result: AMap.AutoCompleteResult) => void
   onError?: (error: string) => void
-  onSelect?: ({type, poi}: {type: 'select'; poi: AMap.POI}) => void
+  onSelect?: ({type, poi}: {type: 'select'; poi: AMap.Poi}) => void
 }
 
 export interface TrafficLayerProps {

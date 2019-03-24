@@ -189,6 +189,49 @@ class Pixel {
   constructor(x: number, y: number) {}
 }
 
+class PlaceSearch {
+  constructor(opts: AMap.PlaceSearchOptions) {
+    this.opts = opts
+  }
+  city?: string
+  citylimit?: boolean
+  lang?: string
+  opts: AMap.PlaceSearchOptions
+  pageIndex?: number
+  pageSize?: number
+  type?: string
+  search = (keyword: string, callback: Function) => {}
+  searchInBounds = (
+    keyword: string,
+    bounds: AMap.Bounds,
+    callback: Function,
+  ) => {}
+  searchNearBy = (
+    keyword: string,
+    center: AMap.LngLat,
+    radius: number,
+    callback: Function,
+  ) => {}
+  setCity = (city: string) => {
+    this.city = city
+  }
+  setCityLimit = (citylimit: boolean) => {
+    this.citylimit = citylimit
+  }
+  setLang = (lang: string) => {
+    this.lang = lang
+  }
+  setPageIndex = (pageIndex: number) => {
+    this.pageIndex = pageIndex
+  }
+  setPageSize = (pageSize: number) => {
+    this.pageSize = pageSize
+  }
+  setType = (type: string) => {
+    this.type = type
+  }
+}
+
 function plugin(serviceNames: string[], callback: Function) {
   callback()
 }
@@ -276,6 +319,7 @@ const defineGlobalVariable = () => {
       MassMarks,
       plugin,
       Pixel,
+      PlaceSearch,
       Polygon,
       Polyline,
       Rectangle,

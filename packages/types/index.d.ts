@@ -143,6 +143,13 @@ declare namespace AMap {
     province: string
   }
 
+  export interface CityInfo {
+    adcode: string
+    citycode: string
+    count: number
+    name: string
+  }
+
   export class Ellipse extends BasicShape {
     constructor(opts: EllipseOptions)
     contains(point: LngLat): boolean
@@ -578,16 +585,83 @@ declare namespace AMap {
     y: number
   }
 
+  export class PlaceSearch extends MVCObject {
+    constructor(opts: PlaceSearchOptions)
+    clear(): void
+    detailOnAMAP(obj: Object): void
+    getDetails(
+      PoiId: string,
+      callback: (status: string, result: string | SearchResult) => void,
+    ): void
+    getLang(): string
+    poiOnAMAP(obj: Object): void
+    search(
+      keyword: string,
+      callback: (status: string, result: string | SearchResult) => void,
+    ): void
+    searchNearBy(
+      keyword: string,
+      center: LngLat,
+      radius: number,
+      callback: (status: string, result: string | SearchResult) => void,
+    ): void
+    searchInBounds(
+      keyword: string,
+      bounds: Bounds | Polygon,
+      callback: (status: string, result: string | SearchResult) => void,
+    ): void
+    setCity(city: string): void
+    setCityLimit(cityLimit: boolean): void
+    setLang(lang: string): void
+    setPageIndex(pageIndex: number): void
+    setPageSize(pageSize: number): void
+    setType(type: string): void
+  }
+
+  export interface PlaceSearchOptions {
+    autoFitView?: boolean
+    children?: number
+    city?: string
+    citylimit?: boolean
+    extensions?: 'all' | 'base'
+    lang?: 'zh_cn' | 'en'
+    map?: Map
+    pageIndex?: number
+    pageSize?: number
+    panel?: string | HTMLElement
+    showCover?: boolean
+    renderStyle?: 'newpc' | 'default'
+    type?: string
+  }
+
   function plugin(serviceNames: string[], callback: Function): void
 
-  export interface POI {
+  export interface Poi {
     adcode: string
     address?: string
+    adname?: string
+    citycode?: string
+    cityname?: string
     district: string
+    email?: string
+    entr_location?: LngLat
+    exit_location?: LngLat
     id: string
     location?: LngLat
     name: string
+    pcode?: string
+    pname?: string
+    postcode?: string
+    tel?: string
     typecode: string
+    website?: string
+  }
+
+  export interface PoiList {
+    count: number
+    pageIndex: number
+    pageSize: number
+    pois: Poi[]
   }
 
   export class Polygon extends BasicShape {
@@ -649,6 +723,21 @@ declare namespace AMap {
   }
 
   export interface SatelliteOptions extends TileLayerOptions {}
+
+  export interface SearchResult {
+    cityList: CityInfo[]
+    info: string
+    keywordList: string[]
+    poiList: PoiList
+  }
+
+  export interface SelectChangeEvent {
+    data: Poi
+    id: string
+    listElement: HTMLElement
+    marker: Marker
+    type: string
+  }
 
   export interface Shop {
     building_id: string
