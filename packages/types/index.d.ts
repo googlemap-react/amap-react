@@ -1,4 +1,9 @@
 declare namespace AMap {
+  export interface Alter {
+    id: number
+    name: string
+  }
+
   export type Anchor =
     | 'top-left'
     | 'top-center'
@@ -148,6 +153,107 @@ declare namespace AMap {
     citycode: string
     count: number
     name: string
+  }
+
+  export interface District {
+    adcode: string
+    name: string
+  }
+
+  export interface DriveRoute {
+    distance: number
+    policy: string
+    restriction: 0 | 1
+    steps: DriveStep[]
+    time: number
+    tolls: number
+    tolls_distance: number
+  }
+
+  export interface DriveStep {
+    action: string
+    assist_action: string
+    cities?: ViaCity[]
+    distance: number
+    end_location: LngLat
+    instruction: string
+    orientation: string
+    path: LngLat[]
+    road: string
+    start_location: LngLat
+    time: number
+    tmcs?: TMC[]
+    toll_road: string
+    tolls: number
+    tolls_distance: number
+  }
+
+  export class Driving extends MVCObject {
+    constructor(opts: DrivingOptions)
+    clear(): void
+    clearAvoidPolygons(): void
+    clearAvoidRoad(): void
+    getAvoidPolygons(): LngLat[][]
+    getAvoidRoad(): string
+    search(
+      origin: LngLat,
+      destination: LngLat,
+      opts: {waypoints: LngLat[]},
+      callback: (status: string, result: string | DrivingResult) => void,
+    ): void
+    search(
+      points: Array<{keyword: string; city?: string}>,
+      callback: (status: string, result: string | DrivingResult) => void,
+    ): void
+    searchOnAMAP({
+      origin,
+      originName,
+      destination,
+      destinationName,
+    }: {
+      origin: LngLat
+      originName: string
+      destination: LngLat
+      destinationName: string
+    }): void
+    setAvoidPolygons(path: LngLat[][]): void
+    setAvoidRoad(road: string): void
+    setPolicy(policy: DrivingPolicy): void
+    setProvinceAndNumber(province: string, number: string): void
+  }
+
+  export interface DrivingOptions {
+    autoFitView?: boolean
+    extensions?: 'all' | 'base'
+    ferry?: number
+    hideMarkers?: boolean
+    isOutline?: boolean
+    map?: Map
+    number?: string
+    outlineColor?: string
+    panel?: string | HTMLElement
+    policy?: DrivingPolicy
+    province?: string
+    showTraffic?: boolean
+  }
+
+  export enum DrivingPolicy {
+    LEAST_TIME,
+    LEAST_FEE,
+    LEAST_DISTANCE,
+    NOT_DEFINED,
+    REAL_TRAFFIC,
+  }
+
+  export interface DrivingResult {
+    destination: LngLat
+    end: Poi
+    info: string
+    origin: LngLat
+    routes: DriveRoute[]
+    start: Poi
+    taxi_cost?: number
+    waypoints: Poi
   }
 
   export class Ellipse extends BasicShape {
@@ -698,6 +804,28 @@ declare namespace AMap {
     showDir?: boolean
   }
 
+  export interface RailStop {
+    adcode: number
+    id: string
+    location: LngLat
+    name: string
+    time: number
+  }
+
+  export interface RailwayDetails {
+    alters?: Alter[]
+    arrival_stop?: Rail_Stop
+    depature_stop: Rail_Stop
+    distance: number
+    id: string
+    name: string
+    spaces: Space[]
+    time: number
+    trip: number
+    type: string
+    via_stops?: Via_Stop[]
+  }
+
   export class Rectangle extends BasicShape {
     constructor(opts: RectangleOptions)
     contains(point: LngLat): boolean
@@ -731,6 +859,14 @@ declare namespace AMap {
     poiList: PoiList
   }
 
+  export interface Segment {
+    distance: number
+    instruction: string
+    time: number
+    transit_mode: 'BUS' | 'METRO_RAIL' | 'RAILWAY' | 'SUBWAY' | 'TAXI' | 'WALK'
+    transit: RailwayDetails | TaxiDetails | TransitDetails | WalkDetails
+  }
+
   export interface SelectChangeEvent {
     data: Poi
     id: string
@@ -758,6 +894,11 @@ declare namespace AMap {
     width: number
   }
 
+  export interface Space {
+    cost: number
+    type: number
+  }
+
   export interface Status {
     animateEnable?: boolean
     doubleClickZoom?: boolean
@@ -773,6 +914,12 @@ declare namespace AMap {
     zoomEnable?: boolean
   }
 
+  export interface Stop {
+    id: string
+    location: LngLat
+    name: string
+  }
+
   export interface StyleObjectOptions {
     anchor: Pixel
     rotation?: number
@@ -785,6 +932,20 @@ declare namespace AMap {
     rotation?: number
     size: SizeLiteral
     url: string
+  }
+
+  export interface SubwayEntrance {
+    location: LngLat
+    name: string
+  }
+
+  export interface TaxiDetails {
+    destination: LngLat
+    distance: number
+    origin: LngLat
+    sname: string
+    time: number
+    tname: string
   }
 
   export class TileLayer extends MVCObject {
@@ -822,6 +983,12 @@ declare namespace AMap {
     name: string
   }
 
+  export interface TMC {
+    distance: number
+    lcode: string
+    status: string
+  }
+
   class Traffic extends TileLayer {
     constructor(opts: TrafficOptions)
     setOpacity(alpha: number): void
@@ -830,6 +997,115 @@ declare namespace AMap {
   export interface TrafficOptions extends TileLayerOptions {
     autoRefresh?: boolean
     interval?: number
+  }
+
+  export class Transfer {
+    constructor(opts: TransferOptions)
+    clear(): void
+    leatAt(time: string, data: string): void
+    search(
+      origin: LngLat,
+      destination: LngLat,
+      callback: (status: string, result: string | TransferResult) => void,
+    ): void
+    search(
+      points: Array<{keyword: string; city?: string}>,
+      callback: (status: string, result: string | TransferResult) => void,
+    ): void
+    searchOnAMAP({
+      origin,
+      originName,
+      destination,
+      destinationName,
+    }: {
+      origin: LngLat
+      originName: string
+      destination: LngLat
+      destinationName: string
+    }): void
+    setCity(city: string): void
+    setCityd(city: string): void
+    setPolicy(policy: TransferPolicy): void
+  }
+
+  export interface TransferOptions {
+    autoFitView?: boolean
+    city?: string
+    cityd?: string
+    extensions?: 'all' | 'base'
+    isOutline?: boolean
+    hideMarkers?: boolean
+    map?: Map
+    nightflag?: boolean
+    outlineColor?: string
+    panel?: string | HTMLElement
+    policy?: TransferPolicy
+  }
+
+  export interface TransferPlan {
+    cost: number
+    distance: number
+    nightLine: boolean
+    path: LngLat[]
+    railway_distance: number
+    segments: Segment[]
+    taxi_distance: number
+    time: number
+    transit_distance: number
+    walking_distance: number
+  }
+
+  export enum TransferPolicy {
+    LEAST_TIME,
+    LEAST_FEE,
+    LEAST_TRANSFER,
+    LEAST_WALK,
+    MOST_COMFORT,
+    NO_SUBWAY,
+  }
+
+  export interface TransferResult {
+    destination: LngLat
+    end: Poi
+    info: string
+    origin: LngLat
+    plans: TransferPlan[]
+    start: Poi
+    taxi_cost: number
+  }
+
+  export interface TransitDetails {
+    entrance: SubwayEntrance
+    exit: SubwayEntrance
+    lines: TransitLine[]
+    on_station: Stop
+    off_station: Stop
+    path: LngLat[]
+    via_num: number
+    via_stops: Stop[]
+  }
+
+  export interface TransitLine {
+    etime: string
+    id: string
+    name: string
+    stime: string
+    type: string
+  }
+
+  export interface ViaCity {
+    adcode: string
+    citycode: string
+    districts: District[]
+    name: string
+  }
+
+  export interface Via_Stop {
+    id: string
+    location: LngLat
+    name: string
+    time: number
+    wait: number
   }
 
   export class View2D {
@@ -843,4 +1119,21 @@ declare namespace AMap {
   }
 
   export type ViewMode = '2D' | '3D'
+
+  export interface WalkDetails {
+    destination: LngLat
+    origin: LngLat
+    path: LngLat[]
+    steps: WalkStep[]
+  }
+
+  export interface WalkStep {
+    action: string
+    assist_action: string
+    distance: number
+    instruction: string
+    path: LngLat[]
+    road: string
+    time: number
+  }
 }

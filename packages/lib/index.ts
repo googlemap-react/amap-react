@@ -1,5 +1,6 @@
 export {default as BezierCurve} from './src/components/BezierCurve'
 export {default as Circle} from './src/components/Circle'
+export {default as Driving} from './src/components/Driving'
 export {default as Ellipse} from './src/components/Ellipse'
 export {default as HeatMap} from './src/components/HeatMap'
 export {default as InfoWindow} from './src/components/InfoWindow'
@@ -21,3 +22,4 @@ export {
   AMapProvider,
 } from './src/contexts/AMapContext'
 export {useAMapAPI, useAMapListener} from './src/hooks'
+export {DRIVING_POLICY} from './src/common/constants'

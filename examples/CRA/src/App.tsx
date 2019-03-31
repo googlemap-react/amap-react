@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import MyBezier from './components/MyBezier'
 import MyCircle from './components/MyCircle'
+import MyDriving from './components/MyDriving'
 import MyEllipse from './components/MyEllipse'
 import MyHeatMap from './components/MyHeatMap'
 import MyMapBox from './components/MyMapBox'
@@ -85,6 +86,7 @@ const App = () => {
           </div>
           <div style={{flex: 1}}>
             <MySearch />
+            <MyDriving />
           </div>
         </div>
       </AMapProvider>

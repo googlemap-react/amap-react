@@ -1,6 +1,3 @@
-import {EventEmitter} from 'events'
-import {removeListener} from 'cluster'
-
 class Autocomplete {
   constructor(opts: AMap.AutoCompleteOptions) {
     this.opts = opts
@@ -42,6 +39,16 @@ class Circle {
   setOptions = (opts: AMap.CircleOptions) => {
     this.opts = opts
   }
+}
+
+class Driving {
+  constructor(opts: AMap.DrivingOptions) {
+    this.opts = opts
+  }
+  opts: AMap.DrivingOptions
+  search = () => {}
+  setPolicy = (policy: AMap.DrivingPolicy) => {}
+  setProvinceAndNumber = (province: string, number: string) => {}
 }
 
 class Ellipse {
@@ -305,6 +312,7 @@ const defineGlobalVariable = () => {
       BezierCurve,
       Bounds,
       Circle,
+      Driving,
       Ellipse,
       event: {
         addListener: () => {},

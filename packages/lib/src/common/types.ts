@@ -50,6 +50,20 @@ export interface CircleProps extends BasicShapeProps {
   opts?: CircleOptions
 }
 
+export interface DrivingOptions extends AMap.DrivingOptions {}
+
+export interface DrivingProps {
+  destination?: AMap.LngLatLiteral
+  id?: string
+  opts?: DrivingOptions
+  origin?: AMap.LngLatLiteral
+  points?: Array<{keyword: string; city?: string}>
+  standalone?: boolean
+  wayPoints?: AMap.LngLatLiteral[]
+  onComplete?: (result: AMap.SearchResult) => void
+  onError?: (error: string) => void
+}
+
 export interface EllipseOptions extends AMap.EllipseOptions {
   center?: AMap.LngLatLiteral
 }
