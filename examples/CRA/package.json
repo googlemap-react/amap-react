@@ -1,6 +1,6 @@
 {
   "name": "@googlemap-react/amap-example-cra",
-  "version": "0.0.1-alpha.7",
+  "version": "0.0.1-alpha.8",
   "private": true,
   "dependencies": {
     "react": "^16.8.5",
